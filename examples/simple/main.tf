@@ -137,8 +137,7 @@ module "stop_virtual_machines" {
   scheduler_ncrontab_expression = "0 22 * * *"
   virtual_machine_schedule      = "true"
   scheduler_tag = {
-    key   = "tostop"
-    value = "true"
+    tostop = "true"
   }
 }
 
@@ -154,7 +153,6 @@ module "start_virtual_machines" {
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"
   scheduler_tag = {
-    key   = "tostop"
-    value = "true"
+    tostop = "true"
   }
 }

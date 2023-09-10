@@ -7,6 +7,7 @@ resource "azurerm_role_definition" "this" {
     actions = [
       "Microsoft.Storage/storageAccounts/blobServices/containers/read",
       "Microsoft.Storage/storageAccounts/blobServices/containers/write",
+      "Microsoft.Compute/virtualMachines/read",
       "Microsoft.Compute/virtualMachines/start/action",
       "Microsoft.Compute/virtualMachines/powerOff/action",
       "Microsoft.Compute/virtualMachines/deallocate/action",

@@ -55,8 +55,7 @@ resource "azurerm_linux_function_app" "this" {
     CURRENT_SUBSCRIPTION_ID        = data.azurerm_subscription.current.subscription_id
     ScheduleAppSetting             = var.scheduler_ncrontab_expression
     SCHEDULER_ACTION               = var.scheduler_action
-    TAG_KEY                        = var.scheduler_tag["key"]
-    TAG_VALUE                      = var.scheduler_tag["value"]
+    SCHEDULER_TAG                  = jsonencode(var.scheduler_tag)
     VIRTUAL_MACHINE_SCHEDULE       = tostring(var.virtual_machine_schedule)
   }
 
