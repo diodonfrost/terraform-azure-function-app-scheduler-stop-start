@@ -4,6 +4,7 @@ import os
 
 import azure.functions as func
 
+from .postgresql_handler import PostgresSqlScheduler
 from .virtual_machine_handler import VirtualMachineScheduler
 
 
@@ -15,6 +16,7 @@ def main(scheduler: func.TimerRequest) -> None:
 
     azure_services = {
         VirtualMachineScheduler: os.environ["VIRTUAL_MACHINE_SCHEDULE"],
+        PostgresSqlScheduler: os.environ["POSTGRESQL_SCHEDULE"],
     }
 
     for service, to_schedule in azure_services.items():

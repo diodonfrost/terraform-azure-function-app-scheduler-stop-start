@@ -49,7 +49,13 @@ variable "scheduler_tag" {
 }
 
 variable "virtual_machine_schedule" {
-  description = "Schedule details for the virtual machine."
+  description = "Enable Azure Virtual Machine scheduler."
+  type        = bool
+  default     = false
+}
+
+variable "postgresql_schedule" {
+  description = "Enable Azure Postgresql scheduler."
   type        = bool
   default     = false
 }

@@ -11,6 +11,9 @@ resource "azurerm_role_definition" "this" {
       "Microsoft.Compute/virtualMachines/start/action",
       "Microsoft.Compute/virtualMachines/powerOff/action",
       "Microsoft.Compute/virtualMachines/deallocate/action",
+      "Microsoft.DBforPostgreSQL/flexibleServers/read",
+      "Microsoft.DBforPostgreSQL/flexibleServers/start/action",
+      "Microsoft.DBforPostgreSQL/flexibleServers/stop/action",
     ]
     not_actions = []
   }
