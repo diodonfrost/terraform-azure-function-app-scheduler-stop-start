@@ -1,4 +1,13 @@
-# [](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.9.0...v) (2023-09-10)
+# [](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.10.0...v) (2023-09-11)
+
+
+
+# [0.10.0](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.9.0...v0.10.0) (2023-09-11)
+
+
+### Features
+
+* **scheduler:** add postgresql scheduler ([894b4c3](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/894b4c358eef2c8c6d756f4d99f1e243fab650b6))
 
 
 
@@ -11,3 +20,6 @@
 * init terraform module ([4694003](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/4694003b0cd094d731dafa7f50cf2ff10a9e1e4b))
 * **terraform:** add azure function ([1623d92](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/1623d92abb8a4a943d1c9b814d08bb3e664eb5dd))
 * **terraform:** support multiple azure tags scheduler ([0da7241](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/0da7241aa8702a6dd541356269ed1cf45a4d942d))
+
+
+
