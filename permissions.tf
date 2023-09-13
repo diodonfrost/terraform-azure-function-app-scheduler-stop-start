@@ -14,6 +14,9 @@ resource "azurerm_role_definition" "this" {
       "Microsoft.DBforPostgreSQL/flexibleServers/read",
       "Microsoft.DBforPostgreSQL/flexibleServers/start/action",
       "Microsoft.DBforPostgreSQL/flexibleServers/stop/action",
+      "Microsoft.DBforMySQL/flexibleServers/read",
+      "Microsoft.DBforMySQL/flexibleServers/start/action",
+      "Microsoft.DBforMySQL/flexibleServers/stop/action",
     ]
     not_actions = []
   }

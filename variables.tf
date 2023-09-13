@@ -60,6 +60,12 @@ variable "postgresql_schedule" {
   default     = false
 }
 
+variable "mysql_schedule" {
+  description = "Enable Azure Mysql scheduler."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   type        = map(string)
   description = "The tags to apply to the Azure resources"
