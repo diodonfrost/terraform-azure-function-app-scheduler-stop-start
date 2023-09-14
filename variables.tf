@@ -54,6 +54,12 @@ variable "virtual_machine_schedule" {
   default     = false
 }
 
+variable "scale_set_schedule" {
+  description = "Enable Azure Scale Set scheduler."
+  type        = bool
+  default     = false
+}
+
 variable "postgresql_schedule" {
   description = "Enable Azure Postgresql scheduler."
   type        = bool

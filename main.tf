@@ -57,6 +57,7 @@ resource "azurerm_linux_function_app" "this" {
     SCHEDULER_ACTION               = var.scheduler_action
     SCHEDULER_TAG                  = jsonencode(var.scheduler_tag)
     VIRTUAL_MACHINE_SCHEDULE       = tostring(var.virtual_machine_schedule)
+    SCALE_SET_SCHEDULE             = tostring(var.scale_set_schedule)
     POSTGRESQL_SCHEDULE            = tostring(var.postgresql_schedule)
     MYSQL_SCHEDULE                 = tostring(var.mysql_schedule)
   }

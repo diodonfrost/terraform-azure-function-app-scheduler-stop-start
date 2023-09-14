@@ -2,8 +2,8 @@
 
 import logging
 
-import azure.mgmt.compute
 from azure.identity import DefaultAzureCredential
+from azure.mgmt.compute import ComputeManagementClient
 
 from .filter_resources_by_tags import FilterByTags
 
@@ -13,7 +13,7 @@ class VirtualMachineScheduler:
 
     def __init__(self, subscription_id: str) -> None:
         """Initialize Azure client."""
-        self.compute_client = azure.mgmt.compute.ComputeManagementClient(
+        self.compute_client = ComputeManagementClient(
             credential=DefaultAzureCredential(), subscription_id=subscription_id
         )
         self.tag_filter = FilterByTags(subscription_id)

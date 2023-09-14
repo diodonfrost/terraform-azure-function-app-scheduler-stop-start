@@ -6,6 +6,7 @@ import azure.functions as func
 
 from .mysql_handler import MySqlScheduler
 from .postgresql_handler import PostgresSqlScheduler
+from .scale_set_handler import ScaleSetScheduler
 from .virtual_machine_handler import VirtualMachineScheduler
 
 
@@ -17,6 +18,7 @@ def main(scheduler: func.TimerRequest) -> None:
 
     azure_services = {
         VirtualMachineScheduler: os.environ["VIRTUAL_MACHINE_SCHEDULE"],
+        ScaleSetScheduler: os.environ["SCALE_SET_SCHEDULE"],
         PostgresSqlScheduler: os.environ["POSTGRESQL_SCHEDULE"],
         MySqlScheduler: os.environ["MYSQL_SCHEDULE"],
     }
