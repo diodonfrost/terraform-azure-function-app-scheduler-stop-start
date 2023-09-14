@@ -1,6 +1,6 @@
-variable "function_app_name_prefix" {
+variable "function_app_name" {
   type        = string
-  description = "The prefix of the Azure Function App name"
+  description = "The name of the Azure Function App"
 }
 
 variable "service_plan_name" {

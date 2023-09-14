@@ -120,7 +120,7 @@ module "stop_scale_sets" {
 
   resource_group_name           = azurerm_resource_group.terratest.name
   location                      = azurerm_resource_group.terratest.location
-  function_app_name_prefix      = "fpn-to-stop-${random_pet.suffix.id}"
+  function_app_name             = "fpn-to-stop-${random_pet.suffix.id}"
   service_plan_name             = "spn-to-stop-${random_pet.suffix.id}"
   storage_account_name          = "santostop${random_id.suffix.hex}"
   scheduler_action              = "stop"
@@ -136,7 +136,7 @@ module "start_scale_sets" {
 
   resource_group_name           = azurerm_resource_group.terratest.name
   location                      = azurerm_resource_group.terratest.location
-  function_app_name_prefix      = "fpn-to-start-${random_pet.suffix.id}"
+  function_app_name             = "fpn-to-start-${random_pet.suffix.id}"
   service_plan_name             = "spn-to-start-${random_pet.suffix.id}"
   storage_account_name          = "santostart${random_id.suffix.hex}"
   scheduler_action              = "start"

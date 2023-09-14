@@ -10,7 +10,7 @@ module "stop_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name_prefix      = "my-stop-az-function-prefix"
+  function_app_name      = "my-stop-az-function-prefix"
   service_plan_name             = "my-stop-service-plan"
   storage_account_name          = "mystorageaccount1"
   scheduler_action              = "stop"
@@ -27,7 +27,7 @@ module "start_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name_prefix      = "my-az-start-function-prefix"
+  function_app_name      = "my-az-start-function-prefix"
   service_plan_name             = "my-start-service-plan2"
   storage_account_name          = "mystartstorageaccount"
   scheduler_action              = "start"
@@ -51,7 +51,7 @@ module "start_virtual_machines" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_function_app_name_prefix"></a> [function\_app\_name\_prefix](#input\_function\_app\_name\_prefix) | The prefix of the Azure Function App name | `string` | n/a | yes |
+| <a name="input_function_app_name"></a> [function\_app\_name\_prefix](#input\_function\_app\_name\_prefix) | The prefix of the Azure Function App name | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location of the Azure resources | `string` | n/a | yes |
 | <a name="input_mysql_schedule"></a> [mysql\_schedule](#input\_mysql\_schedule) | Enable Azure Mysql scheduler. | `bool` | `false` | no |
 | <a name="input_postgresql_schedule"></a> [postgresql\_schedule](#input\_postgresql\_schedule) | Enable Azure Postgresql scheduler. | `bool` | `false` | no |
