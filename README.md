@@ -6,7 +6,7 @@ Terraform module which creates app function scheduler for stop and start resourc
 
 ```hcl
 module "stop_virtual_machines" {
-  source = "diodonfrost/azure-function-scheduler-stop-start/azurerm"
+  source = "diodonfrost/function-app-scheduler-stop-start/azure"
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
@@ -23,7 +23,7 @@ module "stop_virtual_machines" {
 }
 
 module "start_virtual_machines" {
-  source = "diodonfrost/azure-function-scheduler-stop-start/azurerm"
+  source = "diodonfrost/function-app-scheduler-stop-start/azure"
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"

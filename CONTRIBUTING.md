@@ -1,6 +1,6 @@
-# Contributing to terraform-azure-function-scheduler-stop-start
+# Contributing to terraform-azure-function-app-scheduler-stop-start
 
-We would love for you to contribute to terraform-azure-function-scheduler-stop-start and help make it even better than it is today!
+We would love for you to contribute to terraform-azure-function-app-scheduler-stop-start and help make it even better than it is today!
 As a contributor, here are the guidelines we would like you to follow:
 
  - [Coding Rules](#rules)
