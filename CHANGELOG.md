@@ -1,4 +1,15 @@
-# [](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.10.0...v) (2023-09-11)
+# [](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.11.0...v) (2023-09-14)
+
+
+
+# [0.11.0](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/compare/v0.10.0...v0.11.0) (2023-09-14)
+
+
+### Features
+
+* **scheduler:** add mysql scheduler ([c520942](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/c5209425606765223d41bd9a25a45af030c684b9))
+* **scheduler:** add virtual machine scale set scheduler ([f8fc463](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/f8fc463532076956e0a58416c587c7ecfa6dffcf))
+* **terraform:** change function app replacement ([3cb8a13](https://github.com/diodonfrost/terraform-azure-function-scheduler-stop-start/commit/3cb8a13876dd1320c881c88b07913a506544d2d4))
 
 
 
