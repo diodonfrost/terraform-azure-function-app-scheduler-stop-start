@@ -72,6 +72,12 @@ variable "mysql_schedule" {
   default     = false
 }
 
+variable "aks_schedule" {
+  description = "Enable Azure AKS scheduler."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   type        = map(string)
   description = "The tags to apply to the Azure resources"

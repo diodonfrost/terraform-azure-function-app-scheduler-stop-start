@@ -4,6 +4,7 @@ import os
 
 import azure.functions as func
 
+from .aks_handler import AksScheduler
 from .mysql_handler import MySqlScheduler
 from .postgresql_handler import PostgresSqlScheduler
 from .scale_set_handler import ScaleSetScheduler
@@ -21,6 +22,7 @@ def main(scheduler: func.TimerRequest) -> None:
         ScaleSetScheduler: os.environ["SCALE_SET_SCHEDULE"],
         PostgresSqlScheduler: os.environ["POSTGRESQL_SCHEDULE"],
         MySqlScheduler: os.environ["MYSQL_SCHEDULE"],
+        AksScheduler: os.environ["AKS_SCHEDULE"],
     }
 
     for service, to_schedule in azure_services.items():

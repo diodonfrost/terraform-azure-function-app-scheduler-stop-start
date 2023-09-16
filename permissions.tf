@@ -22,6 +22,9 @@ resource "azurerm_role_definition" "this" {
       "Microsoft.DBforMySQL/flexibleServers/read",
       "Microsoft.DBforMySQL/flexibleServers/start/action",
       "Microsoft.DBforMySQL/flexibleServers/stop/action",
+      "Microsoft.ContainerService/managedClusters/read",
+      "Microsoft.ContainerService/managedClusters/start/action",
+      "Microsoft.ContainerService/managedClusters/stop/action",
     ]
     not_actions = []
   }
