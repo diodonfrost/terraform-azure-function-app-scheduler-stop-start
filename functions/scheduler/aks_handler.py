@@ -2,9 +2,11 @@
 
 import logging
 
+from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.containerservice import ContainerServiceClient
 
+from .exceptions import azure_exceptions
 from .filter_resources_by_tags import FilterByTags
 
 
@@ -29,11 +31,14 @@ class AksScheduler:
         """
         resource_type = "Microsoft.ContainerService/managedClusters"
         for aks_id in self.tag_filter.get_resources(azure_tags, resource_type):
-            self.aks_client.managed_clusters.begin_stop(
-                resource_group_name=aks_id.split("/")[4],
-                resource_name=aks_id.split("/")[-1],
-            )
-            logging.info("Stop aks cluster: %s", aks_id)
+            try:
+                self.aks_client.managed_clusters.begin_stop(
+                    resource_group_name=aks_id.split("/")[4],
+                    resource_name=aks_id.split("/")[-1],
+                )
+                logging.info("Stop aks cluster: %s", aks_id)
+            except AzureError as exc:
+                azure_exceptions("aks", aks_id, exc)
 
     def start(self, azure_tags: dict) -> None:
         """Azure aks cluster start function.
@@ -46,8 +51,11 @@ class AksScheduler:
         """
         resource_type = "Microsoft.ContainerService/managedClusters"
         for aks_id in self.tag_filter.get_resources(azure_tags, resource_type):
-            self.aks_client.managed_clusters.begin_start(
-                resource_group_name=aks_id.split("/")[4],
-                resource_name=aks_id.split("/")[-1],
-            )
-            logging.info("Start aks cluster: %s", aks_id)
+            try:
+                self.aks_client.managed_clusters.begin_start(
+                    resource_group_name=aks_id.split("/")[4],
+                    resource_name=aks_id.split("/")[-1],
+                )
+                logging.info("Start aks cluster: %s", aks_id)
+            except AzureError as exc:
+                azure_exceptions("aks", aks_id, exc)

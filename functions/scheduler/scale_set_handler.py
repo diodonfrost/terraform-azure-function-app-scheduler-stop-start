@@ -2,9 +2,11 @@
 
 import logging
 
+from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 
+from .exceptions import azure_exceptions
 from .filter_resources_by_tags import FilterByTags
 
 
@@ -31,12 +33,15 @@ class ScaleSetScheduler:
         for scale_set_id in self.tag_filter.get_resources(azure_tags, resource_type):
             scale_set_rg_name = scale_set_id.split("/")[4]
             scale_set_name = scale_set_id.split("/")[-1]
-            self.compute_client.virtual_machine_scale_sets.begin_deallocate(
-                resource_group_name=scale_set_rg_name,
-                vm_scale_set_name=scale_set_name,
-                vm_instance_i_ds=None,
-            )
-            logging.info("Stop scale set: %s", scale_set_id)
+            try:
+                self.compute_client.virtual_machine_scale_sets.begin_deallocate(
+                    resource_group_name=scale_set_rg_name,
+                    vm_scale_set_name=scale_set_name,
+                    vm_instance_i_ds=None,
+                )
+                logging.info("Stop scale set: %s", scale_set_id)
+            except AzureError as exc:
+                azure_exceptions("scale_set", scale_set_id, exc)
 
     def start(self, azure_tags: dict) -> None:
         """Azure scale set start function.
@@ -51,9 +56,12 @@ class ScaleSetScheduler:
         for scale_set_id in self.tag_filter.get_resources(azure_tags, resource_type):
             scale_set_rg_name = scale_set_id.split("/")[4]
             scale_set_name = scale_set_id.split("/")[-1]
-            self.compute_client.virtual_machine_scale_sets.begin_start(
-                resource_group_name=scale_set_rg_name,
-                vm_scale_set_name=scale_set_name,
-                vm_instance_i_ds=None,
-            )
-            logging.info("Start scale set: %s", scale_set_id)
+            try:
+                self.compute_client.virtual_machine_scale_sets.begin_start(
+                    resource_group_name=scale_set_rg_name,
+                    vm_scale_set_name=scale_set_name,
+                    vm_instance_i_ds=None,
+                )
+                logging.info("Start scale set: %s", scale_set_id)
+            except AzureError as exc:
+                azure_exceptions("scale_set", scale_set_id, exc)

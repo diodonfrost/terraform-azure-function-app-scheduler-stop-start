@@ -2,9 +2,11 @@
 
 import logging
 
+from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.rdbms.mysql_flexibleservers import MySQLManagementClient
 
+from .exceptions import azure_exceptions
 from .filter_resources_by_tags import FilterByTags
 
 
@@ -29,11 +31,14 @@ class MySqlScheduler:
         """
         resource_type = "Microsoft.DBforMySQL/flexibleServers"
         for mysql_id in self.tag_filter.get_resources(azure_tags, resource_type):
-            self.mysql_client.servers.begin_stop(
-                resource_group_name=mysql_id.split("/")[4],
-                server_name=mysql_id.split("/")[-1],
-            )
-            logging.info("Stop mysql: %s", mysql_id)
+            try:
+                self.mysql_client.servers.begin_stop(
+                    resource_group_name=mysql_id.split("/")[4],
+                    server_name=mysql_id.split("/")[-1],
+                )
+                logging.info("Stop mysql: %s", mysql_id)
+            except AzureError as exc:
+                azure_exceptions("mysql", mysql_id, exc)
 
     def start(self, azure_tags: dict) -> None:
         """Azure mysql start function.
@@ -46,8 +51,11 @@ class MySqlScheduler:
         """
         resource_type = "Microsoft.DBforMySQL/flexibleServers"
         for mysql_id in self.tag_filter.get_resources(azure_tags, resource_type):
-            self.mysql_client.servers.begin_start(
-                resource_group_name=mysql_id.split("/")[4],
-                server_name=mysql_id.split("/")[-1],
-            )
-            logging.info("Start mysql: %s", mysql_id)
+            try:
+                self.mysql_client.servers.begin_start(
+                    resource_group_name=mysql_id.split("/")[4],
+                    server_name=mysql_id.split("/")[-1],
+                )
+                logging.info("Start mysql: %s", mysql_id)
+            except AzureError as exc:
+                azure_exceptions("mysql", mysql_id, exc)
