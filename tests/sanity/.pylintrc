@@ -75,7 +75,8 @@ disable=raw-checker-failed,
         too-many-branches,
         useless-object-inheritance,
         inconsistent-return-statements,
-        too-few-public-methods
+        too-few-public-methods,
+        line-too-long
 
 
 # Enable the message, report, category or checker with the given id(s). You can
