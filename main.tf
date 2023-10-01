@@ -65,6 +65,7 @@ resource "azurerm_linux_function_app" "this" {
     POSTGRESQL_SCHEDULE            = tostring(var.postgresql_schedule)
     MYSQL_SCHEDULE                 = tostring(var.mysql_schedule)
     AKS_SCHEDULE                   = tostring(var.aks_schedule)
+    CONTAINER_GROUP_SCHEDULE       = tostring(var.container_group_schedule)
   }
 
   identity {

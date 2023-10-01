@@ -78,6 +78,12 @@ variable "aks_schedule" {
   default     = false
 }
 
+variable "container_group_schedule" {
+  description = "Enable Azure Container group scheduler."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   type        = map(string)
   description = "The tags to apply to the Azure resources"

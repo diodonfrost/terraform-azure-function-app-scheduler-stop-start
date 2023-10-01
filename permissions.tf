@@ -25,6 +25,9 @@ resource "azurerm_role_definition" "this" {
       "Microsoft.ContainerService/managedClusters/read",
       "Microsoft.ContainerService/managedClusters/start/action",
       "Microsoft.ContainerService/managedClusters/stop/action",
+      "Microsoft.ContainerInstance/containerGroups/read",
+      "Microsoft.ContainerInstance/containerGroups/start/action",
+      "Microsoft.ContainerInstance/containerGroups/stop/action",
     ]
     not_actions = []
   }

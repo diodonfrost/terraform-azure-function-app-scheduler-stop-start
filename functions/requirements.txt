@@ -3,10 +3,11 @@ azure-core==1.27.1
 azure-functions==1.15.0
 azure-identity==1.13.0
 azure-mgmt-compute==29.1.0
+azure-mgmt-containerinstance==10.1.0
 azure-mgmt-containerservice==26.0.0
 azure-mgmt-core==1.4.0
-azure-mgmt-resource==23.0.1
 azure-mgmt-rdbms==10.1.0
+azure-mgmt-resource==23.0.1
 certifi==2023.5.7
 cffi==1.15.1
 charset-normalizer==3.1.0
