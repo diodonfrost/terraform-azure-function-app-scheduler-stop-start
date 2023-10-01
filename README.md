@@ -10,7 +10,7 @@ module "stop_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name      = "my-stop-az-function-prefix"
+  function_app_name             = "my-stop-az-function-prefix"
   service_plan_name             = "my-stop-service-plan"
   storage_account_name          = "mystorageaccount1"
   scheduler_action              = "stop"
@@ -27,7 +27,7 @@ module "start_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name      = "my-az-start-function-prefix"
+  function_app_name             = "my-az-start-function-prefix"
   service_plan_name             = "my-start-service-plan2"
   storage_account_name          = "mystartstorageaccount"
   scheduler_action              = "start"
