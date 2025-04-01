@@ -32,5 +32,7 @@ class FilterByTags:
         filter_resources = f"resourceType eq '{resource_type}'"
         resources = self.resource_client.resources.list(filter=filter_resources)
         for resource in resources:
+            if not resource.tags:
+                continue
             if azure_tags.items() <= resource.tags.items():
                 yield resource.id
