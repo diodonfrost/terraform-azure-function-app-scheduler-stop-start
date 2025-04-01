@@ -6,7 +6,7 @@ resource "random_id" "suffix" {
 
 resource "azurerm_resource_group" "terratest" {
   name     = "terratest-${random_pet.suffix.id}"
-  location = "East US"
+  location = "swedencentral"
 }
 
 resource "azurerm_virtual_network" "terratest" {
