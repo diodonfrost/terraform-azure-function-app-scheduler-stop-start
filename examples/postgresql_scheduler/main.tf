@@ -22,7 +22,7 @@ resource "azurerm_postgresql_flexible_server" "to_stop" {
 
   storage_mb = 32768
 
-  sku_name = "GP_Standard_D2s_v3"
+  sku_name = "B_Standard_B1ms"
 
   tags = {
     tostop = "true"
@@ -42,7 +42,7 @@ resource "azurerm_postgresql_flexible_server" "do_not_stop" {
 
   storage_mb = 32768
 
-  sku_name = "GP_Standard_D2s_v3"
+  sku_name = "B_Standard_B1ms"
 
   tags = {
     tostop = "false"

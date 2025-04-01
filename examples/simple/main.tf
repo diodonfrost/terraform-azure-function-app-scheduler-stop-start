@@ -43,7 +43,7 @@ resource "azurerm_linux_virtual_machine" "to_stop" {
   name                = "terratest-to-stop-${count.index}-${random_pet.suffix.id}"
   resource_group_name = azurerm_resource_group.terratest.name
   location            = azurerm_resource_group.terratest.location
-  size                = "Standard_B2ats_v2"
+  size                = "Standard_B1s"
   admin_username      = "adminuser"
   network_interface_ids = [
     azurerm_network_interface.to_stop[count.index].id,
@@ -91,7 +91,7 @@ resource "azurerm_linux_virtual_machine" "do_not_stop" {
   name                = "terratest-do-not-stop-${count.index}-${random_pet.suffix.id}"
   resource_group_name = azurerm_resource_group.terratest.name
   location            = azurerm_resource_group.terratest.location
-  size                = "Standard_B2ats_v2"
+  size                = "Standard_B1s"
   admin_username      = "adminuser"
   network_interface_ids = [
     azurerm_network_interface.do_not_stop[count.index].id,

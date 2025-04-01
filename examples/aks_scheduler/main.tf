@@ -34,7 +34,7 @@ resource "azurerm_kubernetes_cluster" "to_stop" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_D2_v2"
+    vm_size    = "Standard_B1s"
   }
 
   identity {
@@ -57,7 +57,7 @@ resource "azurerm_kubernetes_cluster" "do_no_not" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_D2_v2"
+    vm_size    = "Standard_B2s"
   }
 
   identity {

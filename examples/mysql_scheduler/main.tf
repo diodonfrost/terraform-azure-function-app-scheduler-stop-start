@@ -19,7 +19,7 @@ resource "azurerm_mysql_flexible_server" "to_stop" {
   administrator_login    = "psqladmin"
   administrator_password = "H@Sh1CoR3!"
   zone                   = "1"
-  sku_name               = "GP_Standard_D2ds_v4"
+  sku_name               = "B_Standard_B1ms"
 
   storage {
     size_gb = 32
@@ -40,7 +40,7 @@ resource "azurerm_mysql_flexible_server" "do_not_stop" {
   administrator_login    = "psqladmin"
   administrator_password = "H@Sh1CoR3!"
   zone                   = "1"
-  sku_name               = "GP_Standard_D2ds_v4"
+  sku_name               = "B_Standard_B1ms"
 
   storage {
     size_gb = 32

@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "to_stop" {
   name                = "terratest-to-stop-${count.index}-${random_pet.suffix.id}"
   resource_group_name = azurerm_resource_group.terratest.name
   location            = azurerm_resource_group.terratest.location
-  sku                 = "Standard_B2ats_v2"
+  sku                 = "Standard_B1s"
   instances           = 2
   admin_username      = "adminuser"
 
@@ -72,7 +72,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "do_not_stop" {
   name                = "terratest-do-not-stop-${count.index}-${random_pet.suffix.id}"
   resource_group_name = azurerm_resource_group.terratest.name
   location            = azurerm_resource_group.terratest.location
-  sku                 = "Standard_B2ats_v2"
+  sku                 = "Standard_B1s"
   instances           = 2
   admin_username      = "adminuser"
 
