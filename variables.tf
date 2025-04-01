@@ -8,6 +8,12 @@ variable "service_plan_name" {
   description = "The name of the Azure service plan"
 }
 
+variable "service_plan_sku_name" {
+  type        = string
+  description = "The SKU name for the Azure service plan"
+  default     = "Y1"
+}
+
 variable "storage_account_name" {
   type        = string
   description = "The backend storage account name which will be used by this Function App"

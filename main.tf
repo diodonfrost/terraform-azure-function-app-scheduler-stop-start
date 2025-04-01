@@ -15,7 +15,7 @@ resource "azurerm_service_plan" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = "Linux"
-  sku_name            = "Y1"
+  sku_name            = var.service_plan_sku_name
 
   tags = var.tags
 }
