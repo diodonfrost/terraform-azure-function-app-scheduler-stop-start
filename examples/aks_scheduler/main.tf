@@ -26,7 +26,7 @@ resource "azurerm_subnet" "terratest" {
 resource "azurerm_kubernetes_cluster" "to_stop" {
   count = 2
 
-  name                = "terratest-to-stop-${count.index}-${random_pet.suffix.id}"
+  name                = "to-stop-${count.index}-${random_pet.suffix.id}"
   location            = azurerm_resource_group.terratest.location
   resource_group_name = azurerm_resource_group.terratest.name
   dns_prefix          = "to-stop-${count.index}-${random_pet.suffix.id}"
@@ -49,7 +49,7 @@ resource "azurerm_kubernetes_cluster" "to_stop" {
 resource "azurerm_kubernetes_cluster" "do_no_not" {
   count = 2
 
-  name                = "terratest-do-not-stop-${count.index}-${random_pet.suffix.id}"
+  name                = "do-not-stop-${count.index}-${random_pet.suffix.id}"
   location            = azurerm_resource_group.terratest.location
   resource_group_name = azurerm_resource_group.terratest.name
   dns_prefix          = "do-not-stop-${count.index}-${random_pet.suffix.id}"
