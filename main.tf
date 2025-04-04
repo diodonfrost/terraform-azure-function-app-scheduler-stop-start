@@ -42,8 +42,8 @@ resource "azurerm_linux_function_app" "this" {
   zip_deploy_file             = data.archive_file.this.output_path
 
   site_config {
-    application_insights_connection_string = azurerm_application_insights.this.connection_string
-    application_insights_key               = azurerm_application_insights.this.instrumentation_key
+    application_insights_connection_string = var.enable_application_insights ? azurerm_application_insights.this[0].connection_string : null
+    application_insights_key               = var.enable_application_insights ? azurerm_application_insights.this[0].instrumentation_key : null
     application_stack {
       python_version = "3.11"
     }
@@ -82,6 +82,8 @@ resource "azurerm_linux_function_app" "this" {
 }
 
 resource "azurerm_application_insights" "this" {
+  count = var.enable_application_insights ? 1 : 0
+
   name                = var.function_app_name
   resource_group_name = var.resource_group_name
   location            = var.location

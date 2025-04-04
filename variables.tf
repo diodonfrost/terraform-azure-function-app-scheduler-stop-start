@@ -19,6 +19,12 @@ variable "storage_account_name" {
   description = "The backend storage account name which will be used by this Function App"
 }
 
+variable "enable_application_insights" {
+  type        = bool
+  description = "Enable Application Insights for the Function App"
+  default     = false
+}
+
 variable "resource_group_name" {
   type        = string
   description = "The name of the Resource Group where the Linux Function App should exist"
