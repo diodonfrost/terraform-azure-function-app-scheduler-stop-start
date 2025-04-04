@@ -88,7 +88,7 @@ No modules.
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the Resource Group where the Linux Function App should exist | `string` | n/a | yes |
 | <a name="input_scale_set_schedule"></a> [scale\_set\_schedule](#input\_scale\_set\_schedule) | Enable Azure Scale Set scheduler. | `bool` | `false` | no |
 | <a name="input_scheduler_action"></a> [scheduler\_action](#input\_scheduler\_action) | The action to take for the scheduler, accepted values: 'stop' or 'start' | `string` | n/a | yes |
-| <a name="input_scheduler_ncrontab_expression"></a> [scheduler\_ncrontab\_expression](#input\_scheduler\_ncrontab\_expression) | The NCRONTAB expression which defines the schedule of the Azure function app | `string` | `"0 22 ? * MON-FRI *"` | no |
+| <a name="input_scheduler_ncrontab_expression"></a> [scheduler\_ncrontab\_expression](#input\_scheduler\_ncrontab\_expression) | The NCRONTAB expression which defines the schedule of the Azure function app (UTC Time Zone) | `string` | `"0 22 ? * MON-FRI *"` | no |
 | <a name="input_scheduler_tag"></a> [scheduler\_tag](#input\_scheduler\_tag) | Set the tag to use for identify Azure resources to stop or start | `map(string)` | <pre>{<br/>  "tostop": "true"<br/>}</pre> | no |
 | <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan | `string` | n/a | yes |
 | <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name) | The SKU name for the Azure service plan | `string` | `"Y1"` | no |
