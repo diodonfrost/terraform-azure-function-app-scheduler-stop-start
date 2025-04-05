@@ -4,38 +4,38 @@ resource "random_id" "suffix" {
   byte_length = 6
 }
 
-resource "azurerm_resource_group" "terratest" {
-  name     = "terratest-${random_pet.suffix.id}"
+resource "azurerm_resource_group" "test" {
+  name     = "test-${random_pet.suffix.id}"
   location = "swedencentral"
 }
 
-resource "azurerm_virtual_network" "terratest" {
-  name                = "terratest-${random_pet.suffix.id}"
+resource "azurerm_virtual_network" "test" {
+  name                = "test-${random_pet.suffix.id}"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.terratest.location
-  resource_group_name = azurerm_resource_group.terratest.name
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
 }
 
-resource "azurerm_subnet" "terratest" {
-  name                 = "terratest-${random_pet.suffix.id}"
-  resource_group_name  = azurerm_resource_group.terratest.name
-  virtual_network_name = azurerm_virtual_network.terratest.name
+resource "azurerm_subnet" "test" {
+  name                 = "test-${random_pet.suffix.id}"
+  resource_group_name  = azurerm_resource_group.test.name
+  virtual_network_name = azurerm_virtual_network.test.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "to_stop" {
   count = 2
 
-  name                = "terratest-to-stop-${count.index}-${random_pet.suffix.id}"
-  resource_group_name = azurerm_resource_group.terratest.name
-  location            = azurerm_resource_group.terratest.location
+  name                = "test-to-stop-${count.index}-${random_pet.suffix.id}"
+  resource_group_name = azurerm_resource_group.test.name
+  location            = azurerm_resource_group.test.location
   sku                 = "Standard_B1s"
   instances           = 2
   admin_username      = "adminuser"
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = tls_private_key.terratest.public_key_openssh
+    public_key = tls_private_key.test.public_key_openssh
   }
 
   source_image_reference {
@@ -51,13 +51,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "to_stop" {
   }
 
   network_interface {
-    name    = "terratest-${count.index}"
+    name    = "test-${count.index}"
     primary = true
 
     ip_configuration {
       name      = "internal"
       primary   = true
-      subnet_id = azurerm_subnet.terratest.id
+      subnet_id = azurerm_subnet.test.id
     }
   }
 
@@ -69,16 +69,16 @@ resource "azurerm_linux_virtual_machine_scale_set" "to_stop" {
 resource "azurerm_linux_virtual_machine_scale_set" "do_not_stop" {
   count = 2
 
-  name                = "terratest-do-not-stop-${count.index}-${random_pet.suffix.id}"
-  resource_group_name = azurerm_resource_group.terratest.name
-  location            = azurerm_resource_group.terratest.location
+  name                = "test-do-not-stop-${count.index}-${random_pet.suffix.id}"
+  resource_group_name = azurerm_resource_group.test.name
+  location            = azurerm_resource_group.test.location
   sku                 = "Standard_B1s"
   instances           = 2
   admin_username      = "adminuser"
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = tls_private_key.terratest.public_key_openssh
+    public_key = tls_private_key.test.public_key_openssh
   }
 
   source_image_reference {
@@ -94,13 +94,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "do_not_stop" {
   }
 
   network_interface {
-    name    = "terratest-${count.index}"
+    name    = "test-${count.index}"
     primary = true
 
     ip_configuration {
       name      = "internal"
       primary   = true
-      subnet_id = azurerm_subnet.terratest.id
+      subnet_id = azurerm_subnet.test.id
     }
   }
 
@@ -109,7 +109,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "do_not_stop" {
   }
 }
 
-resource "tls_private_key" "terratest" {
+resource "tls_private_key" "test" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
@@ -118,8 +118,8 @@ resource "tls_private_key" "terratest" {
 module "stop_scale_sets" {
   source = "../../"
 
-  resource_group_name           = azurerm_resource_group.terratest.name
-  location                      = azurerm_resource_group.terratest.location
+  resource_group_name           = azurerm_resource_group.test.name
+  location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-stop-${random_pet.suffix.id}"
   service_plan_name             = "spn-to-stop-${random_pet.suffix.id}"
   storage_account_name          = "santostop${random_id.suffix.hex}"
@@ -134,8 +134,8 @@ module "stop_scale_sets" {
 module "start_scale_sets" {
   source = "../../"
 
-  resource_group_name           = azurerm_resource_group.terratest.name
-  location                      = azurerm_resource_group.terratest.location
+  resource_group_name           = azurerm_resource_group.test.name
+  location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-start-${random_pet.suffix.id}"
   service_plan_name             = "spn-to-start-${random_pet.suffix.id}"
   storage_account_name          = "santostart${random_id.suffix.hex}"
