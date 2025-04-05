@@ -55,6 +55,7 @@ module "start_virtual_machines" {
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | 2.3.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.25.0 |
+| <a name="provider_azurerm.diagnostic_setting_subscription"></a> [azurerm.diagnostic\_setting\_subscription](#provider\_azurerm.diagnostic\_setting\_subscription) | 4.25.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -67,6 +68,7 @@ No modules.
 |------|------|
 | [azurerm_application_insights.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_linux_function_app.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app) | resource |
+| [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_service_plan.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan) | resource |
@@ -81,6 +83,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_schedule"></a> [aks\_schedule](#input\_aks\_schedule) | Enable Azure AKS scheduler. | `bool` | `false` | no |
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
+| <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                            = string<br/>    storage_account_id              = optional(string, null)<br/>    storage_account_subscription_id = optional(string, null)<br/>    log_analytics_id                = optional(string, null)<br/>    log_analytics_subscription_id   = optional(string, null)<br/>    log_analytics_destination_type  = optional(string, null)<br/>    eventhub_name                   = optional(string, null)<br/>    event_hub_subscription_id       = optional(string, null)<br/>    eventhub_authorization_rule_id  = optional(string, null)<br/>    log_categories                  = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                  = optional(bool, false)<br/>  })</pre> | `null` | no |
 | <a name="input_enable_application_insights"></a> [enable\_application\_insights](#input\_enable\_application\_insights) | Enable Application Insights for the Function App | `bool` | `false` | no |
 | <a name="input_function_app_name"></a> [function\_app\_name](#input\_function\_app\_name) | The name of the Azure Function App | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location of the Azure resources | `string` | n/a | yes |
@@ -103,6 +106,8 @@ No modules.
 |------|-------------|
 | <a name="output_application_insights_id"></a> [application\_insights\_id](#output\_application\_insights\_id) | ID of the associated Application Insights |
 | <a name="output_application_insights_name"></a> [application\_insights\_name](#output\_application\_insights\_name) | Name of the associated Application Insights |
+| <a name="output_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#output\_diagnostic\_settings\_name) | The name of the diagnostic settings |
+| <a name="output_diagnostic_settings_target_resource_id"></a> [diagnostic\_settings\_target\_resource\_id](#output\_diagnostic\_settings\_target\_resource\_id) | The target resource ID of the diagnostic settings |
 | <a name="output_function_app_id"></a> [function\_app\_id](#output\_function\_app\_id) | The ID of the function app |
 | <a name="output_function_app_name"></a> [function\_app\_name](#output\_function\_app\_name) | The name of the function app |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the resource group |

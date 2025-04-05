@@ -11,3 +11,16 @@ terraform {
     }
   }
 }
+
+provider "azurerm" {
+  features {}
+  alias = "diagnostic_setting_subscription"
+  subscription_id = try(
+    coalesce(
+      var.diagnostic_settings.event_hub_subscription_id,
+      var.diagnostic_settings.log_analytics_subscription_id,
+      var.diagnostic_settings.storage_account_subscription_id
+    ),
+    data.azurerm_subscription.current.subscription_id
+  )
+}

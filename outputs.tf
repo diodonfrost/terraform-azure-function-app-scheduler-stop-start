@@ -42,3 +42,13 @@ output "application_insights_name" {
   description = "Name of the associated Application Insights"
   value       = try(azurerm_application_insights.this[0].name, null)
 }
+
+output "diagnostic_settings_name" {
+  description = "The name of the diagnostic settings"
+  value       = try(azurerm_monitor_diagnostic_setting.this[0].name, null)
+}
+
+output "diagnostic_settings_target_resource_id" {
+  description = "The target resource ID of the diagnostic settings"
+  value       = try(azurerm_monitor_diagnostic_setting.this[0].target_resource_id, null)
+}
