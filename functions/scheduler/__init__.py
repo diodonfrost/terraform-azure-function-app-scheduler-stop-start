@@ -1,4 +1,5 @@
 """Main function entrypoint for Azure Function App."""
+
 import json
 import os
 

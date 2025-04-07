@@ -1,4 +1,5 @@
 """Filter azure resouces with tags."""
+
 from typing import Iterator
 
 from azure.identity import DefaultAzureCredential
