@@ -1,6 +1,41 @@
 # [](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v) (2025-04-08)
 
 
+# [0.15.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.14.0...v0.15.0) (2025-04-08)
+
+
+### Bug Fixes
+
+* **deps:** constrain azurerm provider to versions ([246755a](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/246755af9915b16f491e1aa64eaa4ba71d5364d6))
+* **scheduler:** handle resources without tags in resource filtering ([4bb3832](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/4bb38327050dd58f763434d16c63f2b242d1b993))
+
+
+### Features
+
+* **examples:** add diagnostic settings configuration examples ([fee4263](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/fee42638c4b0520b1230d5bf3846a307d350a12a))
+* make application insights optional for function App ([22a48b4](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/22a48b454e5b1139367ee0e0d5733ed8a8ef4a9a))
+* **monitoring:** add diagnostic settings for function app ([9ff64a3](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/9ff64a3be0011c271aca223fde2bc1ae6ba29f33))
+* **outputs:** add resource_group_name output variable ([df42007](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/df4200784afe2c7cf9fbc8396f2a513c4ad25473))
+* **scale_set:** suspend or resume automatic repairs ([6ab1304](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/6ab1304fd86e201afcbf6acbeb345f038bd40f51))
+* **scheduler:** add container groups scheduler ([3e753dc](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/3e753dc148335f225c438ff4777551b18415e06e))
+* **terraform:** make service plan sku configurable ([e832b75](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/e832b75c94d09b2f9734417ecbfbb04dcb43e14f))
+* **terraform:** upgrade function app python runtime from 3.9 to 3.11 ([a508955](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/a508955c63aba9e344e344740d35f0c66f081283))
+
+
+### Code Refactoring
+
+* **vm_handler:** improve scheduler code organization ([72679ef](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/72679ef1fa317d357fbfb08f07f3afc900d710f9))
+* **scale_set_handler:** improve scheduler code organization ([36cda38](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/36cda38994bb9988f067884bf28cdb2815e4a4f1))
+* **postgresql_handler:** improve scheduler code organization ([4623a1d](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/4623a1dc26f94886e742e18d74ba6277edcfd3c1))
+* **mysql_handler:** improve scheduler code organization ([8eb6eda](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/8eb6eda4d227d6c1bcd014974ffa6935df69481b))
+* **container_handler:** improve scheduler code organization ([a5f8de7](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/a5f8de717aa5bb07d11689336687bc7736269b16))
+* **aks_handler:** improve scheduler code organization ([6e9fb38](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/6e9fb38cf82701507d81669aaf4030aed02453d3))
+
+
+
+# [](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v) (2025-04-08)
+
+
 # [0.14.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v0.14.0) (2025-04-08)
 
 
