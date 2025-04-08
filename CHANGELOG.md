@@ -1,4 +1,17 @@
-# [](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.12.0...v) (2023-09-24)
+# [](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v) (2025-04-08)
+
+
+# [0.14.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v0.14.0) (2025-04-08)
+
+
+### Features
+
+* **scale_set:** suspend or resume automatic repairs ([commit](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/6ab1304fd86e201afcbf6acbeb345f038bd40f51))
+* **scheduler:** add container groups scheduler ([commit](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/3e753dc148335f225c438ff4777551b18415e06e))
+
+
+
+# [0.13.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.11.0...v0.12.0) (2023-09-24)
 
 
 ### Features
