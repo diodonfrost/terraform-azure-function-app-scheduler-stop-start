@@ -19,10 +19,13 @@ variable "storage_account_name" {
   description = "The backend storage account name which will be used by this Function App"
 }
 
-variable "enable_application_insights" {
-  type        = bool
-  description = "Enable Application Insights for the Function App"
-  default     = false
+variable "application_insights" {
+  description = "Application Insights parameters."
+  type = object({
+    enabled                    = optional(bool, false)
+    log_analytics_workspace_id = optional(string, null)
+  })
+  default = {}
 }
 
 variable "resource_group_name" {
