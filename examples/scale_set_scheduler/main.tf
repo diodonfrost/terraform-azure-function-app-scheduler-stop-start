@@ -9,6 +9,14 @@ resource "azurerm_resource_group" "test" {
   location = "swedencentral"
 }
 
+resource "azurerm_log_analytics_workspace" "test" {
+  name                = "test-${random_pet.suffix.id}"
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 resource "azurerm_virtual_network" "test" {
   name                = "test-${random_pet.suffix.id}"
   address_space       = ["10.0.0.0/16"]
@@ -126,6 +134,10 @@ module "stop_scale_sets" {
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 22 * * *"
   scale_set_schedule            = "true"
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }
@@ -142,6 +154,10 @@ module "start_scale_sets" {
   scheduler_action              = "start"
   scheduler_ncrontab_expression = "0 7 * * *"
   scale_set_schedule            = "true"
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }

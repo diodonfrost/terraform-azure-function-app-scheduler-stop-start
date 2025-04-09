@@ -9,6 +9,14 @@ resource "azurerm_resource_group" "test" {
   location = "swedencentral"
 }
 
+resource "azurerm_log_analytics_workspace" "test" {
+  name                = "test-${random_pet.suffix.id}"
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 resource "azurerm_postgresql_flexible_server" "to_stop" {
   count = 2
 
@@ -61,6 +69,10 @@ module "stop_postgresql" {
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 22 * * *"
   postgresql_schedule           = true
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }
@@ -77,6 +89,10 @@ module "start_postgresql" {
   scheduler_action              = "start"
   scheduler_ncrontab_expression = "0 7 * * *"
   postgresql_schedule           = true
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }

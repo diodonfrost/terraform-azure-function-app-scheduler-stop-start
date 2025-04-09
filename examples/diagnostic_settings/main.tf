@@ -67,6 +67,10 @@ module "to_event_hub" {
     eventhub_name                  = azurerm_eventhub.test.name
     eventhub_authorization_rule_id = azurerm_eventhub_namespace_authorization_rule.test.id
   }
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }
@@ -87,6 +91,10 @@ module "to_log_analytic" {
     name             = "test-${random_pet.suffix.id}"
     log_analytics_id = azurerm_log_analytics_workspace.test.id
   }
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+  }
   scheduler_tag = {
     tostop = "true"
   }
@@ -106,6 +114,10 @@ module "to_storage_account" {
   diagnostic_settings = {
     name               = "test-${random_pet.suffix.id}"
     storage_account_id = azurerm_storage_account.test.id
+  }
+  application_insights = {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
   }
   scheduler_tag = {
     tostop = "true"
