@@ -81,6 +81,11 @@ resource "azurerm_linux_function_app" "this" {
   }
 }
 
+data "azurerm_function_app_host_keys" "this" {
+  name                = azurerm_linux_function_app.this.name
+  resource_group_name = azurerm_linux_function_app.this.resource_group_name
+}
+
 resource "azurerm_application_insights" "this" {
   count = var.application_insights.enabled ? 1 : 0
 

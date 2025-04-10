@@ -33,6 +33,16 @@ output "function_app_name" {
   value       = azurerm_linux_function_app.this.name
 }
 
+output "function_app_master_key" {
+  description = "The master key of the function app"
+  value       = data.azurerm_function_app_host_keys.this.primary_key
+}
+
+output "default_hostname" {
+  description = "The default hostname of the function app"
+  value       = azurerm_linux_function_app.this.default_hostname
+}
+
 output "application_insights_id" {
   description = "ID of the associated Application Insights"
   value       = try(azurerm_application_insights.this[0].id, null)
