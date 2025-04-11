@@ -172,3 +172,16 @@ module "start_virtual_machines" {
     tostop = "true"
   }
 }
+
+module "test_execution" {
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_virtual_machines.default_hostname
+  stop_function_app_master_key = module.stop_virtual_machines.function_app_master_key
+  vm_1_to_stop_name            = azurerm_linux_virtual_machine.to_stop[0].name
+  vm_2_to_stop_name            = azurerm_linux_virtual_machine.to_stop[1].name
+  vm_3_to_stop_name            = azurerm_linux_virtual_machine.to_stop[2].name
+  vm_1_do_not_stop_name        = azurerm_linux_virtual_machine.do_not_stop[0].name
+  vm_2_do_not_stop_name        = azurerm_linux_virtual_machine.do_not_stop[1].name
+}
