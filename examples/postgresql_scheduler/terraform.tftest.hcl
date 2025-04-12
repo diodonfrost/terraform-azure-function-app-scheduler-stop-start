@@ -30,4 +30,24 @@ run "create_test_infrastructure" {
     condition     = module.start_postgresql.function_app_name == "fpn-to-start-${random_pet.suffix.id}"
     error_message = "Invalid function app name"
   }
+
+  assert {
+    condition     = module.test_execution.pg_1_to_stop_state == "Stopping\n"
+    error_message = "Invalid state for pg_1_to_stop"
+  }
+
+  assert {
+    condition     = module.test_execution.pg_2_to_stop_state == "Stopping\n"
+    error_message = "Invalid state for pg_2_to_stop"
+  }
+
+  assert {
+    condition     = module.test_execution.pg_1_do_not_stop_state == "Ready\n"
+    error_message = "Invalid state for pg_1_do_not_stop"
+  }
+
+  assert {
+    condition     = module.test_execution.pg_2_do_not_stop_state == "Ready\n"
+    error_message = "Invalid state for pg_2_do_not_stop"
+  }
 }

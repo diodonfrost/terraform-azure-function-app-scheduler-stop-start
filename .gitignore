@@ -23,6 +23,7 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+*.state
 
 # Ignore CLI configuration files
 .terraformrc

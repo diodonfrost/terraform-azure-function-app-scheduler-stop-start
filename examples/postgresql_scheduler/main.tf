@@ -97,3 +97,15 @@ module "start_postgresql" {
     tostop = "true"
   }
 }
+
+module "test_execution" {
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_postgresql.default_hostname
+  stop_function_app_master_key = module.stop_postgresql.function_app_master_key
+  pg_1_to_stop_name            = azurerm_postgresql_flexible_server.to_stop[0].name
+  pg_2_to_stop_name            = azurerm_postgresql_flexible_server.to_stop[1].name
+  pg_1_do_not_stop_name        = azurerm_postgresql_flexible_server.do_not_stop[0].name
+  pg_2_do_not_stop_name        = azurerm_postgresql_flexible_server.do_not_stop[1].name
+}
