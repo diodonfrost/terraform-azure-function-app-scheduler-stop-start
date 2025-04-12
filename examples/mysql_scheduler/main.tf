@@ -99,3 +99,15 @@ module "start_mysql" {
     tostop = "true"
   }
 }
+
+module "test_execution" {
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_mysql.default_hostname
+  stop_function_app_master_key = module.stop_mysql.function_app_master_key
+  mysql_1_to_stop_name         = azurerm_mysql_flexible_server.to_stop[0].name
+  mysql_2_to_stop_name         = azurerm_mysql_flexible_server.to_stop[1].name
+  mysql_1_do_not_stop_name     = azurerm_mysql_flexible_server.do_not_stop[0].name
+  mysql_2_do_not_stop_name     = azurerm_mysql_flexible_server.do_not_stop[1].name
+}
