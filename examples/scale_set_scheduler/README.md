@@ -18,17 +18,17 @@ Note that this example may create resources which can cost money (virtual machin
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0, < 4.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0, < 4.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 4.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.0.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | >= 3.0.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.7.1 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
 
 ## Modules
 
@@ -36,6 +36,7 @@ Note that this example may create resources which can cost money (virtual machin
 |------|--------|---------|
 | <a name="module_start_scale_sets"></a> [start\_scale\_sets](#module\_start\_scale\_sets) | ../../ | n/a |
 | <a name="module_stop_scale_sets"></a> [stop\_scale\_sets](#module\_stop\_scale\_sets) | ../../ | n/a |
+| <a name="module_test_execution"></a> [test\_execution](#module\_test\_execution) | ./test-execution | n/a |
 
 ## Resources
 
@@ -43,6 +44,7 @@ Note that this example may create resources which can cost money (virtual machin
 |------|------|
 | [azurerm_linux_virtual_machine_scale_set.do_not_stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set) | resource |
 | [azurerm_linux_virtual_machine_scale_set.to_stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set) | resource |
+| [azurerm_log_analytics_workspace.test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_resource_group.test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_subnet.test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
 | [azurerm_virtual_network.test](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |

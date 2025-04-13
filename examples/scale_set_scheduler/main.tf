@@ -162,3 +162,15 @@ module "start_scale_sets" {
     tostop = "true"
   }
 }
+
+module "test_execution" {
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_scale_sets.default_hostname
+  stop_function_app_master_key = module.stop_scale_sets.function_app_master_key
+  scale_set_1_to_stop_name     = azurerm_linux_virtual_machine_scale_set.to_stop[0].name
+  scale_set_2_to_stop_name     = azurerm_linux_virtual_machine_scale_set.to_stop[1].name
+  scale_set_1_do_not_stop_name = azurerm_linux_virtual_machine_scale_set.do_not_stop[0].name
+  scale_set_2_do_not_stop_name = azurerm_linux_virtual_machine_scale_set.do_not_stop[1].name
+}
