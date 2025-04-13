@@ -54,7 +54,7 @@ resource "azurerm_kubernetes_cluster" "to_stop" {
   }
 }
 
-resource "azurerm_kubernetes_cluster" "do_no_not" {
+resource "azurerm_kubernetes_cluster" "do_not_stop" {
   count = 2
 
   name                = "do-not-stop-${count.index}-${random_pet.suffix.id}"
@@ -77,7 +77,7 @@ resource "azurerm_kubernetes_cluster" "do_no_not" {
   }
 }
 
-module "stop_virtual_machines" {
+module "stop_aks_cluster" {
   source = "../../"
 
   resource_group_name           = azurerm_resource_group.test.name
@@ -97,7 +97,7 @@ module "stop_virtual_machines" {
   }
 }
 
-module "start_virtual_machines" {
+module "start_aks_cluster" {
   source = "../../"
 
   resource_group_name           = azurerm_resource_group.test.name
@@ -115,4 +115,16 @@ module "start_virtual_machines" {
   scheduler_tag = {
     tostop = "true"
   }
+}
+
+module "test_execution" {
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_aks_cluster.default_hostname
+  stop_function_app_master_key = module.stop_aks_cluster.function_app_master_key
+  aks_1_to_stop_name           = azurerm_kubernetes_cluster.to_stop[0].name
+  aks_2_to_stop_name           = azurerm_kubernetes_cluster.to_stop[1].name
+  aks_1_do_not_stop_name       = azurerm_kubernetes_cluster.do_not_stop[0].name
+  aks_2_do_not_stop_name       = azurerm_kubernetes_cluster.do_not_stop[1].name
 }
