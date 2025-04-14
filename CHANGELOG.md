@@ -1,4 +1,10 @@
-# [](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.13.0...v) (2025-04-08)
+# [1.0.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.15.0...v1.0.0) (2025-04-14)
+
+
+### Features
+
+* **terraform:** expose app function key in outputs ([d90b073](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/d90b073fc8c8b5fb9618b934f42a06aa9245ebda))
+* **terraform:** refactor application insights configuration ([c9763ad](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/c9763add719ed7927894991aeaac7ab6df734c0d))
 
 
 # [0.15.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.14.0...v0.15.0) (2025-04-08)
