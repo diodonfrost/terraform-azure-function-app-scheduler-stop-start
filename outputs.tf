@@ -36,6 +36,7 @@ output "function_app_name" {
 output "function_app_master_key" {
   description = "The master key of the function app"
   value       = data.azurerm_function_app_host_keys.this.primary_key
+  sensitive   = true
 }
 
 output "default_hostname" {
