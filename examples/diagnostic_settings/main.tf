@@ -17,6 +17,14 @@ resource "azurerm_log_analytics_workspace" "test" {
   retention_in_days   = 30
 }
 
+resource "azurerm_storage_account" "test" {
+  name                     = "test${random_id.suffix.hex}"
+  resource_group_name      = azurerm_resource_group.test.name
+  location                 = azurerm_resource_group.test.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
 resource "azurerm_eventhub_namespace" "test" {
   name                = "test-${random_pet.suffix.id}"
   location            = azurerm_resource_group.test.location
@@ -42,7 +50,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "test" {
   manage              = false
 }
 
-resource "azurerm_storage_account" "test" {
+resource "azurerm_storage_account" "logs" {
   name                     = random_id.suffix.hex
   resource_group_name      = azurerm_resource_group.test.name
   location                 = azurerm_resource_group.test.location
@@ -54,14 +62,15 @@ resource "azurerm_storage_account" "test" {
 module "to_event_hub" {
   source = "../../"
 
-  resource_group_name           = azurerm_resource_group.test.name
-  location                      = azurerm_resource_group.test.location
-  function_app_name             = "fpn-to-event-hub-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-event-hub-${random_pet.suffix.id}"
-  storage_account_name          = "dstoevh${random_id.suffix.hex}"
-  scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
-  virtual_machine_schedule      = "true"
+  resource_group_name                 = azurerm_resource_group.test.name
+  location                            = azurerm_resource_group.test.location
+  function_app_name                   = "fpn-to-event-hub-${random_pet.suffix.id}"
+  service_plan_name                   = "spn-to-event-hub-${random_pet.suffix.id}"
+  storage_account_name                = azurerm_storage_account.test.name
+  storage_account_resource_group_name = azurerm_storage_account.test.resource_group_name
+  scheduler_action                    = "stop"
+  scheduler_ncrontab_expression       = "0 7 * * *"
+  virtual_machine_schedule            = "true"
   diagnostic_settings = {
     name                           = "test-${random_pet.suffix.id}"
     eventhub_name                  = azurerm_eventhub.test.name
@@ -79,14 +88,15 @@ module "to_event_hub" {
 module "to_log_analytic" {
   source = "../../"
 
-  resource_group_name           = azurerm_resource_group.test.name
-  location                      = azurerm_resource_group.test.location
-  function_app_name             = "fpn-to-log-analytic-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-log-analytic-${random_pet.suffix.id}"
-  storage_account_name          = "dstola${random_id.suffix.hex}"
-  scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
-  virtual_machine_schedule      = "true"
+  resource_group_name                 = azurerm_resource_group.test.name
+  location                            = azurerm_resource_group.test.location
+  function_app_name                   = "fpn-to-log-analytic-${random_pet.suffix.id}"
+  service_plan_name                   = "spn-to-log-analytic-${random_pet.suffix.id}"
+  storage_account_name                = azurerm_storage_account.test.name
+  storage_account_resource_group_name = azurerm_storage_account.test.resource_group_name
+  scheduler_action                    = "stop"
+  scheduler_ncrontab_expression       = "0 7 * * *"
+  virtual_machine_schedule            = "true"
   diagnostic_settings = {
     name             = "test-${random_pet.suffix.id}"
     log_analytics_id = azurerm_log_analytics_workspace.test.id
@@ -103,17 +113,18 @@ module "to_log_analytic" {
 module "to_storage_account" {
   source = "../../"
 
-  resource_group_name           = azurerm_resource_group.test.name
-  location                      = azurerm_resource_group.test.location
-  function_app_name             = "fpn-to-storage-account-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-storage-account-${random_pet.suffix.id}"
-  storage_account_name          = "dstoest${random_id.suffix.hex}"
-  scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
-  virtual_machine_schedule      = "true"
+  resource_group_name                 = azurerm_resource_group.test.name
+  location                            = azurerm_resource_group.test.location
+  function_app_name                   = "fpn-to-storage-account-${random_pet.suffix.id}"
+  service_plan_name                   = "spn-to-storage-account-${random_pet.suffix.id}"
+  storage_account_name                = azurerm_storage_account.test.name
+  storage_account_resource_group_name = azurerm_storage_account.test.resource_group_name
+  scheduler_action                    = "stop"
+  scheduler_ncrontab_expression       = "0 7 * * *"
+  virtual_machine_schedule            = "true"
   diagnostic_settings = {
     name               = "test-${random_pet.suffix.id}"
-    storage_account_id = azurerm_storage_account.test.id
+    storage_account_id = azurerm_storage_account.logs.id
   }
   application_insights = {
     enabled                    = true
