@@ -54,8 +54,8 @@ module "start_virtual_machines" {
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | 2.3.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.25.0 |
-| <a name="provider_azurerm.diagnostic_setting_subscription"></a> [azurerm.diagnostic\_setting\_subscription](#provider\_azurerm.diagnostic\_setting\_subscription) | 4.25.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
+| <a name="provider_azurerm.diagnostic_setting_subscription"></a> [azurerm.diagnostic\_setting\_subscription](#provider\_azurerm.diagnostic\_setting\_subscription) | 3.117.1 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -76,6 +76,7 @@ No modules.
 | [terraform_data.replacement](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
 | [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.3.0/docs/data-sources/file) | data source |
 | [azurerm_function_app_host_keys.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/function_app_host_keys) | data source |
+| [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 
 ## Inputs
@@ -85,6 +86,7 @@ No modules.
 | <a name="input_aks_schedule"></a> [aks\_schedule](#input\_aks\_schedule) | Enable Azure AKS scheduler. | `bool` | `false` | no |
 | <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Application Insights parameters. | <pre>object({<br/>    enabled                    = optional(bool, false)<br/>    log_analytics_workspace_id = optional(string, null)<br/>  })</pre> | `{}` | no |
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
+| <a name="input_create_storage_account"></a> [create\_storage\_account](#input\_create\_storage\_account) | Whether to create a new storage account | `bool` | `false` | no |
 | <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                            = string<br/>    storage_account_id              = optional(string, null)<br/>    storage_account_subscription_id = optional(string, null)<br/>    log_analytics_id                = optional(string, null)<br/>    log_analytics_subscription_id   = optional(string, null)<br/>    log_analytics_destination_type  = optional(string, null)<br/>    eventhub_name                   = optional(string, null)<br/>    event_hub_subscription_id       = optional(string, null)<br/>    eventhub_authorization_rule_id  = optional(string, null)<br/>    log_categories                  = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                  = optional(bool, false)<br/>  })</pre> | `null` | no |
 | <a name="input_function_app_name"></a> [function\_app\_name](#input\_function\_app\_name) | The name of the Azure Function App | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location of the Azure resources | `string` | n/a | yes |
@@ -97,7 +99,8 @@ No modules.
 | <a name="input_scheduler_tag"></a> [scheduler\_tag](#input\_scheduler\_tag) | Set the tag to use for identify Azure resources to stop or start | `map(string)` | <pre>{<br/>  "tostop": "true"<br/>}</pre> | no |
 | <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan | `string` | n/a | yes |
 | <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name) | The SKU name for the Azure service plan | `string` | `"Y1"` | no |
-| <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The backend storage account name which will be used by this Function App | `string` | n/a | yes |
+| <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The backend storage account name which will be used by this Function App | `string` | `null` | no |
+| <a name="input_storage_account_resource_group_name"></a> [storage\_account\_resource\_group\_name](#input\_storage\_account\_resource\_group\_name) | The resource group name of the storage account | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to apply to the Azure resources | `map(string)` | `{}` | no |
 | <a name="input_virtual_machine_schedule"></a> [virtual\_machine\_schedule](#input\_virtual\_machine\_schedule) | Enable Azure Virtual Machine scheduler. | `bool` | `false` | no |
 
