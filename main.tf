@@ -42,7 +42,7 @@ resource "azurerm_linux_function_app" "this" {
     }
   }
 
-  app_settings = {
+  app_settings = merge({
     SCM_DO_BUILD_DURING_DEPLOYMENT = true
     ENABLE_ORYX_BUILD              = true
     FUNCTIONS_WORKER_RUNTIME       = "python"
@@ -56,7 +56,7 @@ resource "azurerm_linux_function_app" "this" {
     MYSQL_SCHEDULE                 = tostring(var.mysql_schedule)
     AKS_SCHEDULE                   = tostring(var.aks_schedule)
     CONTAINER_GROUP_SCHEDULE       = tostring(var.container_group_schedule)
-  }
+  }, var.custom_app_settings)
 
   identity {
     type = "SystemAssigned"

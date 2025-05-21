@@ -63,3 +63,9 @@ output "diagnostic_settings_target_resource_id" {
   description = "The target resource ID of the diagnostic settings"
   value       = try(azurerm_monitor_diagnostic_setting.this[0].target_resource_id, null)
 }
+
+output "app_settings" {
+  description = "The app settings of the function app"
+  value       = azurerm_linux_function_app.this.app_settings
+  sensitive   = true
+}
