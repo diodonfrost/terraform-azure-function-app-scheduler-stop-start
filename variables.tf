@@ -16,7 +16,8 @@ variable "service_plan_sku_name" {
 
 variable "storage_account_name" {
   type        = string
-  description = "The backend storage account name which will be used by this Function App"
+  description = "The backend storage account name which will be used by this Function App. If not provided, a name will be automatically generated with a random suffix."
+  default     = null
 }
 
 variable "application_insights" {

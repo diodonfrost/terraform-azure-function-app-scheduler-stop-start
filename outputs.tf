@@ -9,7 +9,7 @@ output "storage_account_id" {
 }
 
 output "storage_account_name" {
-  description = "The name of the storage account"
+  description = "The name of the storage account (generated automatically if not provided in variables)"
   value       = azurerm_storage_account.this.name
 }
 
