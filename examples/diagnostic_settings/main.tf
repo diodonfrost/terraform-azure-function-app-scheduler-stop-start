@@ -57,8 +57,6 @@ module "to_event_hub" {
   resource_group_name           = azurerm_resource_group.test.name
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-event-hub-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-event-hub-${random_pet.suffix.id}"
-  storage_account_name          = "dstoevh${random_id.suffix.hex}"
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"
@@ -82,8 +80,6 @@ module "to_log_analytic" {
   resource_group_name           = azurerm_resource_group.test.name
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-log-analytic-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-log-analytic-${random_pet.suffix.id}"
-  storage_account_name          = "dstola${random_id.suffix.hex}"
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"
@@ -106,8 +102,6 @@ module "to_storage_account" {
   resource_group_name           = azurerm_resource_group.test.name
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-storage-account-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-storage-account-${random_pet.suffix.id}"
-  storage_account_name          = "dstoest${random_id.suffix.hex}"
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"

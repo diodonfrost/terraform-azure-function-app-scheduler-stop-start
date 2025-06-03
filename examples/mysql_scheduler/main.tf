@@ -66,8 +66,6 @@ module "stop_mysql" {
   resource_group_name           = azurerm_resource_group.test.name
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-stop-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-stop-${random_pet.suffix.id}"
-  storage_account_name          = "santostop${random_id.suffix.hex}"
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 22 * * *"
   mysql_schedule                = true
@@ -86,8 +84,6 @@ module "start_mysql" {
   resource_group_name           = azurerm_resource_group.test.name
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-start-${random_pet.suffix.id}"
-  service_plan_name             = "spn-to-start-${random_pet.suffix.id}"
-  storage_account_name          = "santostart${random_id.suffix.hex}"
   scheduler_action              = "start"
   scheduler_ncrontab_expression = "0 7 * * *"
   mysql_schedule                = true

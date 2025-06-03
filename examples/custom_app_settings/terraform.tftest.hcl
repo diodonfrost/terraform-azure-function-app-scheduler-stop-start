@@ -17,11 +17,6 @@ run "create_test_infrastructure" {
   }
 
   assert {
-    condition     = module.start_virtual_machines.service_plan_name == "spn-to-start-${random_pet.suffix.id}"
-    error_message = "Invalid service plan name"
-  }
-
-  assert {
     condition     = module.start_virtual_machines.function_app_name == "fpn-to-start-${random_pet.suffix.id}"
     error_message = "Invalid function app name"
   }

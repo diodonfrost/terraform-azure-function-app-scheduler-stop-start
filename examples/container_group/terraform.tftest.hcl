@@ -7,11 +7,6 @@ run "create_test_infrastructure" {
   }
 
   assert {
-    condition     = module.stop_container_instances.service_plan_name == "spn-to-stop-${random_pet.suffix.id}"
-    error_message = "Invalid service plan name"
-  }
-
-  assert {
     condition     = module.stop_container_instances.function_app_name == "fpn-to-stop-${random_pet.suffix.id}"
     error_message = "Invalid function app name"
   }
@@ -19,11 +14,6 @@ run "create_test_infrastructure" {
   assert {
     condition     = module.start_container_instances.resource_group_name == azurerm_resource_group.test.name
     error_message = "Invalid resource group name"
-  }
-
-  assert {
-    condition     = module.start_container_instances.service_plan_name == "spn-to-start-${random_pet.suffix.id}"
-    error_message = "Invalid service plan name"
   }
 
   assert {
