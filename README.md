@@ -10,9 +10,7 @@ module "stop_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name             = "my-stop-az-function-prefix"
-  service_plan_name             = "my-stop-service-plan"
-  storage_account_name          = "mystorageaccount1"
+  function_app_name             = "my-az-stop-function"
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 22 * * *"
   virtual_machine_schedule      = "true"
@@ -27,9 +25,7 @@ module "start_virtual_machines" {
 
   resource_group_name           = "my-rg"
   location                      = "westeurope"
-  function_app_name             = "my-az-start-function-prefix"
-  service_plan_name             = "my-start-service-plan2"
-  storage_account_name          = "mystartstorageaccount"
+  function_app_name             = "my-az-start-function"
   scheduler_action              = "start"
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"
