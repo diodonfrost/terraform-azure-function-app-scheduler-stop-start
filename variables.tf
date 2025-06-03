@@ -5,7 +5,8 @@ variable "function_app_name" {
 
 variable "service_plan_name" {
   type        = string
-  description = "The name of the Azure service plan"
+  description = "The name of the Azure service plan. If not provided, a name will be automatically generated."
+  default     = null
 }
 
 variable "service_plan_sku_name" {

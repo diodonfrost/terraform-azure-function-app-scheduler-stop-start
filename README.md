@@ -48,7 +48,7 @@ module "start_virtual_machines" {
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | 2.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0, < 4.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0, < 4.0 |
 
 ## Providers
 
@@ -75,6 +75,7 @@ No modules.
 | [azurerm_role_definition.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_service_plan.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
+| [random_id.service_plan_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [random_id.storage_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [terraform_data.replacement](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
 | [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.3.0/docs/data-sources/file) | data source |
@@ -86,10 +87,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_schedule"></a> [aks\_schedule](#input\_aks\_schedule) | Enable Azure AKS scheduler. | `bool` | `false` | no |
-| <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Application Insights parameters. | <pre>object({<br>    enabled                    = optional(bool, false)<br>    log_analytics_workspace_id = optional(string, null)<br>  })</pre> | `{}` | no |
+| <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Application Insights parameters. | <pre>object({<br/>    enabled                    = optional(bool, false)<br/>    log_analytics_workspace_id = optional(string, null)<br/>  })</pre> | `{}` | no |
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
 | <a name="input_custom_app_settings"></a> [custom\_app\_settings](#input\_custom\_app\_settings) | Additional app settings/environment variables to be added to the function app | `map(string)` | `{}` | no |
-| <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br>    name                            = string<br>    storage_account_id              = optional(string, null)<br>    storage_account_subscription_id = optional(string, null)<br>    log_analytics_id                = optional(string, null)<br>    log_analytics_subscription_id   = optional(string, null)<br>    log_analytics_destination_type  = optional(string, null)<br>    eventhub_name                   = optional(string, null)<br>    event_hub_subscription_id       = optional(string, null)<br>    eventhub_authorization_rule_id  = optional(string, null)<br>    log_categories                  = optional(list(string), ["FunctionAppLogs"])<br>    enable_metrics                  = optional(bool, false)<br>  })</pre> | `null` | no |
+| <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                            = string<br/>    storage_account_id              = optional(string, null)<br/>    storage_account_subscription_id = optional(string, null)<br/>    log_analytics_id                = optional(string, null)<br/>    log_analytics_subscription_id   = optional(string, null)<br/>    log_analytics_destination_type  = optional(string, null)<br/>    eventhub_name                   = optional(string, null)<br/>    event_hub_subscription_id       = optional(string, null)<br/>    eventhub_authorization_rule_id  = optional(string, null)<br/>    log_categories                  = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                  = optional(bool, false)<br/>  })</pre> | `null` | no |
 | <a name="input_function_app_name"></a> [function\_app\_name](#input\_function\_app\_name) | The name of the Azure Function App | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location of the Azure resources | `string` | n/a | yes |
 | <a name="input_mysql_schedule"></a> [mysql\_schedule](#input\_mysql\_schedule) | Enable Azure Mysql scheduler. | `bool` | `false` | no |
@@ -98,8 +99,8 @@ No modules.
 | <a name="input_scale_set_schedule"></a> [scale\_set\_schedule](#input\_scale\_set\_schedule) | Enable Azure Scale Set scheduler. | `bool` | `false` | no |
 | <a name="input_scheduler_action"></a> [scheduler\_action](#input\_scheduler\_action) | The action to take for the scheduler, accepted values: 'stop' or 'start' | `string` | n/a | yes |
 | <a name="input_scheduler_ncrontab_expression"></a> [scheduler\_ncrontab\_expression](#input\_scheduler\_ncrontab\_expression) | The NCRONTAB expression which defines the schedule of the Azure function app (UTC Time Zone) | `string` | `"0 22 ? * MON-FRI *"` | no |
-| <a name="input_scheduler_tag"></a> [scheduler\_tag](#input\_scheduler\_tag) | Set the tag to use for identify Azure resources to stop or start | `map(string)` | <pre>{<br>  "tostop": "true"<br>}</pre> | no |
-| <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan | `string` | n/a | yes |
+| <a name="input_scheduler_tag"></a> [scheduler\_tag](#input\_scheduler\_tag) | Set the tag to use for identify Azure resources to stop or start | `map(string)` | <pre>{<br/>  "tostop": "true"<br/>}</pre> | no |
+| <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan. If not provided, a name will be automatically generated. | `string` | `null` | no |
 | <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name) | The SKU name for the Azure service plan | `string` | `"Y1"` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The backend storage account name which will be used by this Function App. If not provided, a name will be automatically generated with a random suffix. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to apply to the Azure resources | `map(string)` | `{}` | no |

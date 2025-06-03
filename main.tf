@@ -1,7 +1,12 @@
 data "azurerm_subscription" "current" {}
 
+resource "random_id" "service_plan_suffix" {
+  count       = var.service_plan_name == null ? 1 : 0
+  byte_length = 4
+}
+
 resource "azurerm_service_plan" "this" {
-  name                = var.service_plan_name
+  name                = local.generated_service_plan_name
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = "Linux"
