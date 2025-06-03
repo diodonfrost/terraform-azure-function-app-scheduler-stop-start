@@ -17,14 +17,6 @@ resource "azurerm_log_analytics_workspace" "test" {
   retention_in_days   = 30
 }
 
-resource "azurerm_storage_account" "test" {
-  name                     = "test${random_id.suffix.hex}"
-  resource_group_name      = azurerm_resource_group.test.name
-  location                 = azurerm_resource_group.test.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
 resource "azurerm_mysql_flexible_server" "to_stop" {
   count = 2
 
@@ -71,15 +63,14 @@ resource "azurerm_mysql_flexible_server" "do_not_stop" {
 module "stop_mysql" {
   source = "../../"
 
-  resource_group_name                 = azurerm_resource_group.test.name
-  location                            = azurerm_resource_group.test.location
-  function_app_name                   = "fpn-to-stop-${random_pet.suffix.id}"
-  service_plan_name                   = "spn-to-stop-${random_pet.suffix.id}"
-  storage_account_name                = azurerm_storage_account.test.name
-  storage_account_resource_group_name = azurerm_storage_account.test.resource_group_name
-  scheduler_action                    = "stop"
-  scheduler_ncrontab_expression       = "0 22 * * *"
-  mysql_schedule                      = true
+  resource_group_name           = azurerm_resource_group.test.name
+  location                      = azurerm_resource_group.test.location
+  function_app_name             = "fpn-to-stop-${random_pet.suffix.id}"
+  service_plan_name             = "spn-to-stop-${random_pet.suffix.id}"
+  storage_account_name          = "santostop${random_id.suffix.hex}"
+  scheduler_action              = "stop"
+  scheduler_ncrontab_expression = "0 22 * * *"
+  mysql_schedule                = true
   application_insights = {
     enabled                    = true
     log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
@@ -92,15 +83,14 @@ module "stop_mysql" {
 module "start_mysql" {
   source = "../../"
 
-  resource_group_name                 = azurerm_resource_group.test.name
-  location                            = azurerm_resource_group.test.location
-  function_app_name                   = "fpn-to-start-${random_pet.suffix.id}"
-  service_plan_name                   = "spn-to-start-${random_pet.suffix.id}"
-  storage_account_name                = azurerm_storage_account.test.name
-  storage_account_resource_group_name = azurerm_storage_account.test.resource_group_name
-  scheduler_action                    = "start"
-  scheduler_ncrontab_expression       = "0 7 * * *"
-  mysql_schedule                      = true
+  resource_group_name           = azurerm_resource_group.test.name
+  location                      = azurerm_resource_group.test.location
+  function_app_name             = "fpn-to-start-${random_pet.suffix.id}"
+  service_plan_name             = "spn-to-start-${random_pet.suffix.id}"
+  storage_account_name          = "santostart${random_id.suffix.hex}"
+  scheduler_action              = "start"
+  scheduler_ncrontab_expression = "0 7 * * *"
+  mysql_schedule                = true
   application_insights = {
     enabled                    = true
     log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
