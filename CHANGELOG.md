@@ -1,4 +1,22 @@
-# [1.0.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.15.0...v1.0.0) (2025-04-14)
+# [1.1.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.0.1...v1.1.0) (2025-06-03)
+
+
+### Features
+
+* **terraform:** add automatic service plan name generation ([acac1fc](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/acac1fc))
+* **terraform:** implement automatic storage account name generation ([8157181](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/8157181))
+* **terraform:** add support for extra azure function app settings ([f01f0ac](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/f01f0ac))
+
+
+# [1.0.1](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.0.0...v1.0.1) (2025-04-16)
+
+
+### Bug Fixes
+
+* **terraform:** mark function app master key as sensitive output ([e73d609](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/e73d609))
+
+
+# [1.0.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v0.15.0...v1.0.0)
 
 
 ### Features
