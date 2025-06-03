@@ -17,19 +17,6 @@ variable "service_plan_sku_name" {
 variable "storage_account_name" {
   type        = string
   description = "The backend storage account name which will be used by this Function App"
-  default     = null
-}
-
-variable "storage_account_resource_group_name" {
-  type        = string
-  description = "The resource group name of the storage account"
-  default     = null
-}
-
-variable "create_storage_account" {
-  type        = bool
-  description = "Whether to create a new storage account"
-  default     = false
 }
 
 variable "application_insights" {
