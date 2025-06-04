@@ -21,6 +21,15 @@ variable "storage_account_name" {
   default     = null
 }
 
+variable "existing_storage_account" {
+  description = "Configuration for using an existing external storage account instead of creating a new one."
+  type = object({
+    name                = string
+    resource_group_name = string
+  })
+  default = null
+}
+
 variable "application_insights" {
   description = "Application Insights parameters."
   type = object({

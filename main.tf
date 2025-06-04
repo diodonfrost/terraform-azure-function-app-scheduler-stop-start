@@ -30,8 +30,8 @@ resource "azurerm_linux_function_app" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
-  storage_account_name        = azurerm_storage_account.this.name
-  storage_account_access_key  = azurerm_storage_account.this.primary_access_key
+  storage_account_name        = local.storage_account_name
+  storage_account_access_key  = local.storage_account_access_key
   service_plan_id             = azurerm_service_plan.this.id
   functions_extension_version = "~4"
   zip_deploy_file             = data.archive_file.this.output_path

@@ -5,12 +5,12 @@ output "resource_group_name" {
 
 output "storage_account_id" {
   description = "The ID of the storage account"
-  value       = azurerm_storage_account.this.id
+  value       = try(azurerm_storage_account.this[0].id, null)
 }
 
 output "storage_account_name" {
   description = "The name of the storage account (generated automatically if not provided in variables)"
-  value       = azurerm_storage_account.this.name
+  value       = try(azurerm_storage_account.this[0].name, null)
 }
 
 output "service_plan_id" {

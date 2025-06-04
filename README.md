@@ -76,6 +76,7 @@ No modules.
 | [terraform_data.replacement](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
 | [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.3.0/docs/data-sources/file) | data source |
 | [azurerm_function_app_host_keys.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/function_app_host_keys) | data source |
+| [azurerm_storage_account.external](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 
 ## Inputs
@@ -87,6 +88,7 @@ No modules.
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
 | <a name="input_custom_app_settings"></a> [custom\_app\_settings](#input\_custom\_app\_settings) | Additional app settings/environment variables to be added to the function app | `map(string)` | `{}` | no |
 | <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                            = string<br/>    storage_account_id              = optional(string, null)<br/>    storage_account_subscription_id = optional(string, null)<br/>    log_analytics_id                = optional(string, null)<br/>    log_analytics_subscription_id   = optional(string, null)<br/>    log_analytics_destination_type  = optional(string, null)<br/>    eventhub_name                   = optional(string, null)<br/>    event_hub_subscription_id       = optional(string, null)<br/>    eventhub_authorization_rule_id  = optional(string, null)<br/>    log_categories                  = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                  = optional(bool, false)<br/>  })</pre> | `null` | no |
+| <a name="input_existing_storage_account"></a> [existing\_storage\_account](#input\_existing\_storage\_account) | Configuration for using an existing external storage account instead of creating a new one. | <pre>object({<br/>    name                = string<br/>    resource_group_name = string<br/>  })</pre> | `null` | no |
 | <a name="input_function_app_name"></a> [function\_app\_name](#input\_function\_app\_name) | The name of the Azure Function App | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The location of the Azure resources | `string` | n/a | yes |
 | <a name="input_mysql_schedule"></a> [mysql\_schedule](#input\_mysql\_schedule) | Enable Azure Mysql scheduler. | `bool` | `false` | no |
