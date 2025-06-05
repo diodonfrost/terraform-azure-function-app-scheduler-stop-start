@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.1.0...v1.2.0) (2025-06-05)
+
+
+### Features
+
+* **terraform:** add support for existing service plans ([d862a0c](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/d862a0c))
+* **terraform:** support existing storage accounts ([e6758f3](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/e6758f3))
+
+
 # [1.1.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.0.1...v1.1.0) (2025-06-03)
 
 
