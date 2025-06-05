@@ -30,6 +30,15 @@ variable "existing_storage_account" {
   default = null
 }
 
+variable "existing_service_plan" {
+  description = "Configuration for using an existing external service plan instead of creating a new one."
+  type = object({
+    name                = string
+    resource_group_name = string
+  })
+  default = null
+}
+
 variable "application_insights" {
   description = "Application Insights parameters."
   type = object({

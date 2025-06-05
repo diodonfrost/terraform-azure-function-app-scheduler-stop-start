@@ -1,11 +1,18 @@
 data "azurerm_subscription" "current" {}
 
+data "azurerm_service_plan" "external" {
+  count               = var.existing_service_plan != null ? 1 : 0
+  name                = var.existing_service_plan.name
+  resource_group_name = var.existing_service_plan.resource_group_name
+}
+
 resource "random_id" "service_plan_suffix" {
-  count       = var.service_plan_name == null ? 1 : 0
+  count       = var.service_plan_name == null && var.existing_service_plan == null ? 1 : 0
   byte_length = 4
 }
 
 resource "azurerm_service_plan" "this" {
+  count               = var.existing_service_plan == null ? 1 : 0
   name                = local.generated_service_plan_name
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -32,7 +39,7 @@ resource "azurerm_linux_function_app" "this" {
 
   storage_account_name        = local.storage_account_name
   storage_account_access_key  = local.storage_account_access_key
-  service_plan_id             = azurerm_service_plan.this.id
+  service_plan_id             = local.service_plan_id
   functions_extension_version = "~4"
   zip_deploy_file             = data.archive_file.this.output_path
 

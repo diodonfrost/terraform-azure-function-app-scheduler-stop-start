@@ -15,12 +15,12 @@ output "storage_account_name" {
 
 output "service_plan_id" {
   description = "The ID of the service plan"
-  value       = azurerm_service_plan.this.id
+  value       = local.service_plan_id
 }
 
 output "service_plan_name" {
   description = "The name of the service plan"
-  value       = azurerm_service_plan.this.name
+  value       = var.existing_service_plan != null ? data.azurerm_service_plan.external[0].name : azurerm_service_plan.this[0].name
 }
 
 output "function_app_id" {
