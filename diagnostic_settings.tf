@@ -1,6 +1,5 @@
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  count    = var.diagnostic_settings == null ? 0 : 1
-  provider = azurerm.diagnostic_setting_subscription
+  count = var.diagnostic_settings == null ? 0 : 1
 
   name               = var.diagnostic_settings.name
   target_resource_id = azurerm_linux_function_app.this.id
