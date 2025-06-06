@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.2.0...v2.0.0) (2025-06-05)
+
+
+### Bug Fixes
+
+* **diagnostic_settings:** remove cross-subscription configuration ([05d7d41](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/commit/05d7d41))
+
+
+### BREAKING CHANGES
+
+* **diagnostic_settings:** Provider alias removed from diagnostic settings module to improve Terraform compatibility and remove legacy module constraints
+
+
 # [1.2.0](https://github.com/diodonfrost/terraform-azure-function-app-scheduler-stop-start/compare/v1.1.0...v1.2.0) (2025-06-05)
 
 
