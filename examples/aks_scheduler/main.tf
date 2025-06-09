@@ -114,6 +114,7 @@ module "start_aks_cluster" {
 }
 
 module "test_execution" {
+  count  = var.test_mode ? 1 : 0
   source = "./test-execution"
 
   resource_group_name          = azurerm_resource_group.test.name

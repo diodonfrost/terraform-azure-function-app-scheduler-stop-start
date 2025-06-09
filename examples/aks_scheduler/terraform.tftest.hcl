@@ -1,6 +1,10 @@
 run "create_test_infrastructure" {
   command = apply
 
+  variables {
+    test_mode = true
+  }
+
   assert {
     condition     = module.stop_aks_cluster.resource_group_name == azurerm_resource_group.test.name
     error_message = "Invalid resource group name"

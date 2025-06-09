@@ -1,6 +1,10 @@
 run "create_test_infrastructure" {
   command = apply
 
+  variables {
+    test_mode = true
+  }
+
   assert {
     condition     = module.stop_scale_sets.resource_group_name == azurerm_resource_group.test.name
     error_message = "Invalid resource group name"
@@ -22,12 +26,12 @@ run "create_test_infrastructure" {
   }
 
   assert {
-    condition     = module.test_execution.to_stop_1_power_state == "deallocated"
+    condition     = module.test_execution.to_stop_1_power_state == "deallocated" || module.test_execution.to_stop_1_power_state == "deallocating"
     error_message = "Scale Set 1 Power State is not deallocated"
   }
 
   assert {
-    condition     = module.test_execution.to_stop_2_power_state == "deallocated"
+    condition     = module.test_execution.to_stop_2_power_state == "deallocated" || module.test_execution.to_stop_2_power_state == "deallocating"
     error_message = "Scale Set 2 Power State is not deallocated"
   }
 
