@@ -35,4 +35,5 @@ RUN ansible-galaxy role install diodonfrost.ohmyzsh && \
 RUN ansible-galaxy role install diodonfrost.p10k && \
     ansible-pull -U https://github.com/diodonfrost/ansible-role-p10k tests/test.yml -e "zsh_plugin=ohmyzsh" -e '{"p10k_users": [vscode]}'
 
-RUN python3 -m pip install pre-commit black tox
+RUN ansible-galaxy role install diodonfrost.opentofu && \
+    ansible-pull -U https://github.com/diodonfrost/ansible-role-opentofu tests/test.yml
