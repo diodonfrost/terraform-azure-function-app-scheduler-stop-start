@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import sys
-import os
-import time
-import subprocess
 import json
+import subprocess
+import sys
+import time
+
+from azure.core.exceptions import ResourceNotFoundError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
-from azure.core.exceptions import ResourceNotFoundError
 
 
 def get_subscription_id():

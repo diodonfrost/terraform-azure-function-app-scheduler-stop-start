@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import sys
-import os
-import time
-import subprocess
 import json
+import subprocess
+import sys
+import time
+
+from azure.core.exceptions import ResourceNotFoundError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
-from azure.core.exceptions import ResourceNotFoundError
 
 
 def get_subscription_id():
@@ -30,7 +30,7 @@ def get_scale_set_state(resource_group_name, scale_set_name, subscription_id):
         credential = DefaultAzureCredential()
         compute_client = ComputeManagementClient(credential, subscription_id)
 
-        scale_set = compute_client.virtual_machine_scale_sets.get(
+        compute_client.virtual_machine_scale_sets.get(
             resource_group_name=resource_group_name, vm_scale_set_name=scale_set_name
         )
 
