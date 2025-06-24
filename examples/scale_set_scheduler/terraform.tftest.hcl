@@ -26,22 +26,22 @@ run "create_test_infrastructure" {
   }
 
   assert {
-    condition     = module.test_execution.to_stop_1_power_state == "deallocated" || module.test_execution.to_stop_1_power_state == "deallocating"
+    condition     = module.test_execution[0].to_stop_1_power_state == "deallocated" || module.test_execution[0].to_stop_1_power_state == "deallocating"
     error_message = "Scale Set 1 Power State is not deallocated"
   }
 
   assert {
-    condition     = module.test_execution.to_stop_2_power_state == "deallocated" || module.test_execution.to_stop_2_power_state == "deallocating"
+    condition     = module.test_execution[0].to_stop_2_power_state == "deallocated" || module.test_execution[0].to_stop_2_power_state == "deallocating"
     error_message = "Scale Set 2 Power State is not deallocated"
   }
 
   assert {
-    condition     = module.test_execution.do_not_stop_1_power_state == "running"
+    condition     = module.test_execution[0].do_not_stop_1_power_state == "running"
     error_message = "Scale Set 1 Do Not Stop Power State is not running"
   }
 
   assert {
-    condition     = module.test_execution.do_not_stop_2_power_state == "running"
+    condition     = module.test_execution[0].do_not_stop_2_power_state == "running"
     error_message = "Scale Set 2 Do Not Stop Power State is not running"
   }
 }

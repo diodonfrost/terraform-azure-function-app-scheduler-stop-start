@@ -26,22 +26,22 @@ run "create_test_infrastructure" {
   }
 
   assert {
-    condition     = module.test_execution.aks_1_to_stop_state == "Stopped\n"
+    condition     = module.test_execution[0].aks_1_to_stop_state == "Stopped\n"
     error_message = "Invalid state for aks_1_to_stop"
   }
 
   assert {
-    condition     = module.test_execution.aks_2_to_stop_state == "Stopped\n"
+    condition     = module.test_execution[0].aks_2_to_stop_state == "Stopped\n"
     error_message = "Invalid state for aks_2_to_stop"
   }
 
   assert {
-    condition     = module.test_execution.aks_1_do_not_stop_state == "Running\n"
+    condition     = module.test_execution[0].aks_1_do_not_stop_state == "Running\n"
     error_message = "Invalid state for aks_1_do_not_stop"
   }
 
   assert {
-    condition     = module.test_execution.aks_2_do_not_stop_state == "Running\n"
+    condition     = module.test_execution[0].aks_2_do_not_stop_state == "Running\n"
     error_message = "Invalid state for aks_2_do_not_stop"
   }
 }
