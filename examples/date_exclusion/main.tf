@@ -86,6 +86,16 @@ module "stop_virtual_machines_with_exclusions" {
   scheduler_action              = "stop"
   scheduler_ncrontab_expression = "0 22 * * MON-FRI"
   virtual_machine_schedule      = "true"
+  scheduler_excluded_dates = [
+    "01-01",                         # New Year's Day
+    "12-25",                         # Christmas Day
+    "12-24",                         # Christmas Eve
+    "07-04",                         # Independence Day (US)
+    "11-24",                         # Thanksgiving (example date)
+    "05-01",                         # Labor Day
+    "12-31",                         # New Year's Eve
+    formatdate("MM-DD", timestamp()) # Current date (for tests purposes)
+  ]
 
   scheduler_tag = {
     tostop = "true"
@@ -103,18 +113,19 @@ module "start_virtual_machines" {
   scheduler_ncrontab_expression = "0 7 * * MON-FRI"
   virtual_machine_schedule      = "true"
 
-  scheduler_excluded_dates = [
-    "01-01",                         # New Year's Day
-    "12-25",                         # Christmas Day
-    "12-24",                         # Christmas Eve
-    "07-04",                         # Independence Day (US)
-    "11-24",                         # Thanksgiving (example date)
-    "05-01",                         # Labor Day
-    "12-31",                         # New Year's Eve
-    formatdate("MM-DD", timestamp()) # Current date (for tests purposes)
-  ]
-
   scheduler_tag = {
     tostop = "true"
   }
+}
+
+# Test execution module to verify date exclusion functionality
+module "test_execution" {
+  count  = var.test_mode ? 1 : 0
+  source = "./test-execution"
+
+  resource_group_name          = azurerm_resource_group.test.name
+  stop_function_app_url        = module.stop_virtual_machines_with_exclusions.default_hostname
+  stop_function_app_master_key = module.stop_virtual_machines_with_exclusions.function_app_master_key
+  vm_1_to_stop_name            = azurerm_linux_virtual_machine.to_stop[0].name
+  vm_2_to_stop_name            = azurerm_linux_virtual_machine.to_stop[1].name
 }
