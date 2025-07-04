@@ -59,6 +59,7 @@ resource "azurerm_linux_function_app" "this" {
     ENABLE_ORYX_BUILD              = true
     FUNCTIONS_WORKER_RUNTIME       = "python"
     CURRENT_SUBSCRIPTION_ID        = data.azurerm_subscription.current.subscription_id
+    SUBSCRIPTION_IDS               = jsonencode(local.subscription_ids)
     ScheduleAppSetting             = var.scheduler_ncrontab_expression
     SCHEDULER_ACTION               = var.scheduler_action
     SCHEDULER_TAG                  = jsonencode(var.scheduler_tag)

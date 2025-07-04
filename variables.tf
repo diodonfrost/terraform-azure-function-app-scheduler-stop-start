@@ -87,6 +87,19 @@ variable "scheduler_action" {
   }
 }
 
+variable "subscription_ids" {
+  description = "List of Azure subscription IDs to manage resources in. If empty, uses the current subscription only."
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for id in var.subscription_ids : can(regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", id))
+    ])
+    error_message = "All subscription IDs must be valid UUIDs."
+  }
+}
+
 variable "scheduler_tag" {
   description = "Set the tag to use for identify Azure resources to stop or start"
   type        = map(string)

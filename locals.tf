@@ -15,4 +15,7 @@ locals {
   # Storage account configuration - use external if provided, otherwise use the created one
   storage_account_name       = var.existing_storage_account != null ? data.azurerm_storage_account.external[0].name : azurerm_storage_account.this[0].name
   storage_account_access_key = var.existing_storage_account != null ? data.azurerm_storage_account.external[0].primary_access_key : azurerm_storage_account.this[0].primary_access_key
+
+  # Subscription configuration - use provided list or current subscription
+  subscription_ids = length(var.subscription_ids) > 0 ? var.subscription_ids : [data.azurerm_subscription.current.subscription_id]
 }

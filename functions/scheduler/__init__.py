@@ -23,7 +23,11 @@ def main(scheduler: func.TimerRequest) -> None:
 
     scheduler_action = os.environ["SCHEDULER_ACTION"]
     azure_tags = json.loads(os.environ["SCHEDULER_TAG"])
-    current_subscription_id = os.environ["CURRENT_SUBSCRIPTION_ID"]
+    subscription_ids = json.loads(
+        os.environ.get(
+            "SUBSCRIPTION_IDS", f'["{os.environ["CURRENT_SUBSCRIPTION_ID"]}"]'
+        )
+    )
 
     azure_services = {
         VirtualMachineScheduler: os.environ["VIRTUAL_MACHINE_SCHEDULE"],
@@ -34,7 +38,8 @@ def main(scheduler: func.TimerRequest) -> None:
         ContainerGroupScheduler: os.environ["CONTAINER_GROUP_SCHEDULE"],
     }
 
-    for service, to_schedule in azure_services.items():
-        if strtobool(to_schedule):
-            _azure_services = service(current_subscription_id)
-            getattr(_azure_services, scheduler_action)(azure_tags=azure_tags)
+    for subscription_id in subscription_ids:
+        for service, to_schedule in azure_services.items():
+            if strtobool(to_schedule):
+                _azure_services = service(subscription_id)
+                getattr(_azure_services, scheduler_action)(azure_tags=azure_tags)

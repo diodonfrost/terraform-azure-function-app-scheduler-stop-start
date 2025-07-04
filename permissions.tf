@@ -1,6 +1,7 @@
 resource "azurerm_role_definition" "this" {
-  name        = azurerm_linux_function_app.this.name
-  scope       = data.azurerm_subscription.current.id
+  for_each    = toset(local.subscription_ids)
+  name        = "${azurerm_linux_function_app.this.name}-${substr(each.value, 0, 8)}"
+  scope       = "/subscriptions/${each.value}"
   description = "Custom role to stop and start Azure resources"
 
   permissions {
@@ -33,12 +34,13 @@ resource "azurerm_role_definition" "this" {
   }
 
   assignable_scopes = [
-    data.azurerm_subscription.current.id
+    "/subscriptions/${each.value}"
   ]
 }
 
 resource "azurerm_role_assignment" "this" {
-  scope              = data.azurerm_subscription.current.id
-  role_definition_id = azurerm_role_definition.this.role_definition_resource_id
+  for_each           = toset(local.subscription_ids)
+  scope              = "/subscriptions/${each.value}"
+  role_definition_id = azurerm_role_definition.this[each.value].role_definition_resource_id
   principal_id       = azurerm_linux_function_app.this.identity[0].principal_id
 }
