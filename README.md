@@ -103,6 +103,7 @@ No modules.
 | <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan. If not provided, a name will be automatically generated. | `string` | `null` | no |
 | <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name) | The SKU name for the Azure service plan | `string` | `"Y1"` | no |
 | <a name="input_storage_account_name"></a> [storage\_account\_name](#input\_storage\_account\_name) | The backend storage account name which will be used by this Function App. If not provided, a name will be automatically generated with a random suffix. | `string` | `null` | no |
+| <a name="input_subscription_ids"></a> [subscription\_ids](#input\_subscription\_ids) | List of Azure subscription IDs to manage resources in. If empty, uses the current subscription only. | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to apply to the Azure resources | `map(string)` | `{}` | no |
 | <a name="input_virtual_machine_schedule"></a> [virtual\_machine\_schedule](#input\_virtual\_machine\_schedule) | Enable Azure Virtual Machine scheduler. | `bool` | `false` | no |
 
