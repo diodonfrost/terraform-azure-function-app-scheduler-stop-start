@@ -61,7 +61,7 @@ variable "location" {
 variable "scheduler_ncrontab_expression" {
   description = "The NCRONTAB expression which defines the schedule of the Azure function app (UTC Time Zone)"
   type        = string
-  default     = "0 22 ? * MON-FRI *"
+  default     = "0 0 22 * * 1-5"
 }
 
 variable "scheduler_excluded_dates" {
