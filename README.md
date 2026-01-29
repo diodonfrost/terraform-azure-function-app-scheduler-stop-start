@@ -42,8 +42,9 @@ module "start_virtual_machines" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_archive"></a> [archive](#requirement\_archive) | 2.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0, < 4.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.8 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | 2.7.1 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.0.0, < 5.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0, < 4.0 |
 
 ## Providers
@@ -63,6 +64,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.7.1/docs/resources/file) | resource |
 | [azurerm_application_insights.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_linux_function_app.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app) | resource |
 | [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
@@ -73,7 +75,6 @@ No modules.
 | [random_id.service_plan_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [random_id.storage_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [terraform_data.replacement](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
-| [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.3.0/docs/data-sources/file) | data source |
 | [azurerm_function_app_host_keys.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/function_app_host_keys) | data source |
 | [azurerm_service_plan.external](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/service_plan) | data source |
 | [azurerm_storage_account.external](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account) | data source |
@@ -98,7 +99,7 @@ No modules.
 | <a name="input_scale_set_schedule"></a> [scale\_set\_schedule](#input\_scale\_set\_schedule) | Enable Azure Scale Set scheduler. | `bool` | `false` | no |
 | <a name="input_scheduler_action"></a> [scheduler\_action](#input\_scheduler\_action) | The action to take for the scheduler, accepted values: 'stop' or 'start' | `string` | n/a | yes |
 | <a name="input_scheduler_excluded_dates"></a> [scheduler\_excluded\_dates](#input\_scheduler\_excluded\_dates) | List of specific dates to exclude from scheduling in MM-DD format (e.g., ['12-25', '01-01']) | `list(string)` | `[]` | no |
-| <a name="input_scheduler_ncrontab_expression"></a> [scheduler\_ncrontab\_expression](#input\_scheduler\_ncrontab\_expression) | The NCRONTAB expression which defines the schedule of the Azure function app (UTC Time Zone) | `string` | `"0 22 ? * MON-FRI *"` | no |
+| <a name="input_scheduler_ncrontab_expression"></a> [scheduler\_ncrontab\_expression](#input\_scheduler\_ncrontab\_expression) | The NCRONTAB expression which defines the schedule of the Azure function app (UTC Time Zone) | `string` | `"0 0 22 * * 1-5"` | no |
 | <a name="input_scheduler_tag"></a> [scheduler\_tag](#input\_scheduler\_tag) | Set the tag to use for identify Azure resources to stop or start | `map(string)` | <pre>{<br/>  "tostop": "true"<br/>}</pre> | no |
 | <a name="input_service_plan_name"></a> [service\_plan\_name](#input\_service\_plan\_name) | The name of the Azure service plan. If not provided, a name will be automatically generated. | `string` | `null` | no |
 | <a name="input_service_plan_sku_name"></a> [service\_plan\_sku\_name](#input\_service\_plan\_sku\_name) | The SKU name for the Azure service plan | `string` | `"Y1"` | no |
@@ -131,7 +132,8 @@ No modules.
 
 Some of these tests create real resources in an Azure subscription. That means they cost money to run, especially if you don't clean up after yourself. Please be considerate of the resources you create and take extra care to clean everything up when you're done!
 
-In order to run tests that access your Azure subscription, run 'azure login'
+In order to run tests that access your Azure subscription, run `az login`  and
+`export ARM_SUBSCRIPTION_ID="your-subscription-id"` to set the subscription context.
 
 ### End-to-end tests
 

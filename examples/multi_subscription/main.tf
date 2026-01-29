@@ -10,6 +10,8 @@ resource "tls_private_key" "test" {
 }
 
 resource "azurerm_log_analytics_workspace" "test" {
+  provider = azurerm.subscription_2
+
   name                = "test-${random_pet.suffix.id}"
   location            = azurerm_resource_group.subscription_1.location
   resource_group_name = azurerm_resource_group.subscription_1.name
