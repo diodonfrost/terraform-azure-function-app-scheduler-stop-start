@@ -13,10 +13,20 @@ resource "azurerm_log_analytics_workspace" "test" {
   provider = azurerm.subscription_2
 
   name                = "test-${random_pet.suffix.id}"
-  location            = azurerm_resource_group.subscription_1.location
-  resource_group_name = azurerm_resource_group.subscription_1.name
+  location            = azurerm_resource_group.subscription_2.location
+  resource_group_name = azurerm_resource_group.subscription_2.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
+}
+
+resource "azurerm_application_insights" "test" {
+  provider = azurerm.subscription_2
+
+  name                = "test-${random_pet.suffix.id}"
+  location            = azurerm_resource_group.subscription_2.location
+  resource_group_name = azurerm_resource_group.subscription_2.name
+  workspace_id        = azurerm_log_analytics_workspace.test.id
+  application_type    = "other"
 }
 
 module "stop_virtual_machines" {
@@ -29,8 +39,8 @@ module "stop_virtual_machines" {
   scheduler_ncrontab_expression = "0 22 * * *"
   virtual_machine_schedule      = "true"
   application_insights = {
-    enabled                    = true
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+    connection_string   = azurerm_application_insights.test.connection_string
+    instrumentation_key = azurerm_application_insights.test.instrumentation_key
   }
   subscription_ids = [
     var.subscription_1_id,
@@ -51,8 +61,8 @@ module "start_virtual_machines" {
   scheduler_ncrontab_expression = "0 7 * * *"
   virtual_machine_schedule      = "true"
   application_insights = {
-    enabled                    = true
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+    connection_string   = azurerm_application_insights.test.connection_string
+    instrumentation_key = azurerm_application_insights.test.instrumentation_key
   }
   subscription_ids = [
     var.subscription_1_id,
