@@ -65,7 +65,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [archive_file.this](https://registry.terraform.io/providers/hashicorp/archive/2.7.1/docs/resources/file) | resource |
-| [azurerm_application_insights.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_linux_function_app.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app) | resource |
 | [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
@@ -85,7 +84,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_schedule"></a> [aks\_schedule](#input\_aks\_schedule) | Enable Azure AKS scheduler. | `bool` | `false` | no |
-| <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Application Insights parameters. | <pre>object({<br/>    enabled                    = optional(bool, false)<br/>    log_analytics_workspace_id = optional(string, null)<br/>  })</pre> | `{}` | no |
+| <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Configuration for using an existing external Application Insights. | <pre>object({<br/>    connection_string   = string<br/>    instrumentation_key = string<br/>  })</pre> | `null` | no |
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
 | <a name="input_custom_app_settings"></a> [custom\_app\_settings](#input\_custom\_app\_settings) | Additional app settings/environment variables to be added to the function app | `map(string)` | `{}` | no |
 | <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                           = string<br/>    storage_account_id             = optional(string, null)<br/>    log_analytics_id               = optional(string, null)<br/>    log_analytics_destination_type = optional(string, null)<br/>    eventhub_name                  = optional(string, null)<br/>    eventhub_authorization_rule_id = optional(string, null)<br/>    log_categories                 = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                 = optional(bool, false)<br/>  })</pre> | `null` | no |
@@ -113,8 +112,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_app_settings"></a> [app\_settings](#output\_app\_settings) | The app settings of the function app |
-| <a name="output_application_insights_id"></a> [application\_insights\_id](#output\_application\_insights\_id) | ID of the associated Application Insights |
-| <a name="output_application_insights_name"></a> [application\_insights\_name](#output\_application\_insights\_name) | Name of the associated Application Insights |
 | <a name="output_default_hostname"></a> [default\_hostname](#output\_default\_hostname) | The default hostname of the function app |
 | <a name="output_diagnostic_settings_name"></a> [diagnostic\_settings\_name](#output\_diagnostic\_settings\_name) | The name of the diagnostic settings |
 | <a name="output_diagnostic_settings_target_resource_id"></a> [diagnostic\_settings\_target\_resource\_id](#output\_diagnostic\_settings\_target\_resource\_id) | The target resource ID of the diagnostic settings |
