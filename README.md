@@ -12,7 +12,7 @@ module "stop_virtual_machines" {
   location                      = "westeurope"
   function_app_name             = "my-az-stop-function"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 22 * * *"
+  scheduler_ncrontab_expression = "0 0 22 * * *"
   virtual_machine_schedule      = "true"
   postgresql_schedule           = "true"
   scheduler_tag = {
@@ -27,7 +27,7 @@ module "start_virtual_machines" {
   location                      = "westeurope"
   function_app_name             = "my-az-start-function"
   scheduler_action              = "start"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * *"
   virtual_machine_schedule      = "true"
   postgresql_schedule           = "true"
   scheduler_tag = {
