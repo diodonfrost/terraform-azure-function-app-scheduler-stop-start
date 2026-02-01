@@ -166,6 +166,12 @@ variable "diagnostic_settings" {
   default = null
 }
 
+variable "create_role_assignment" {
+  description = "Whether to create the custom role definition and role assignment. Set to false if you manage permissions externally."
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   type        = map(string)
   description = "The tags to apply to the Azure resources"
