@@ -33,6 +33,11 @@ output "function_app_name" {
   value       = azurerm_linux_function_app.this.name
 }
 
+output "function_app_principal_id" {
+  description = "The principal ID of the function app"
+  value       = azurerm_linux_function_app.this.identity[0].principal_id
+}
+
 output "function_app_master_key" {
   description = "The master key of the function app"
   value       = data.azurerm_function_app_host_keys.this.primary_key
