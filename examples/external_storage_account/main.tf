@@ -24,7 +24,7 @@ module "stop_virtual_machines_with_external_storage" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-ext-storage-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 22 * * *"
+  scheduler_ncrontab_expression = "0 0 22 * * 1-5"
   virtual_machine_schedule      = false
   existing_storage_account = {
     name                = azurerm_storage_account.external.name
@@ -42,7 +42,7 @@ module "start_virtual_machines_with_external_storage_auto_key" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-ext-auto-${random_pet.suffix.id}"
   scheduler_action              = "start"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = false
   existing_storage_account = {
     name                = azurerm_storage_account.external.name

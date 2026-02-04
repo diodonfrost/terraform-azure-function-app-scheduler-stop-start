@@ -71,7 +71,7 @@ module "stop_virtual_machines_with_exclusions" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-stop-exclusions-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 22 * * MON-FRI"
+  scheduler_ncrontab_expression = "0 0 22 * * MON-FRI"
   virtual_machine_schedule      = "true"
   scheduler_excluded_dates = [
     "01-01",                         # New Year's Day
@@ -97,7 +97,7 @@ module "start_virtual_machines" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-start-normal-${random_pet.suffix.id}"
   scheduler_action              = "start"
-  scheduler_ncrontab_expression = "0 7 * * MON-FRI"
+  scheduler_ncrontab_expression = "0 0 7 * * MON-FRI"
   virtual_machine_schedule      = "true"
 
   scheduler_tag = {

@@ -66,7 +66,7 @@ module "to_event_hub" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-event-hub-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = "true"
   diagnostic_settings = {
     name                           = "test-${random_pet.suffix.id}"
@@ -89,7 +89,7 @@ module "to_log_analytic" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-log-analytic-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = "true"
   diagnostic_settings = {
     name             = "test-${random_pet.suffix.id}"
@@ -111,7 +111,7 @@ module "to_storage_account" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-storage-account-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = "true"
   diagnostic_settings = {
     name               = "test-${random_pet.suffix.id}"

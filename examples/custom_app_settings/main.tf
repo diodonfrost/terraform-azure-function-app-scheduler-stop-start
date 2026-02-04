@@ -16,7 +16,7 @@ module "stop_virtual_machines" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-stop-${random_pet.suffix.id}"
   scheduler_action              = "stop"
-  scheduler_ncrontab_expression = "0 22 * * *"
+  scheduler_ncrontab_expression = "0 0 22 * * 1-5"
   virtual_machine_schedule      = "true"
   custom_app_settings = {
     "test" = random_pet.suffix.id
@@ -33,7 +33,7 @@ module "start_virtual_machines" {
   location                      = azurerm_resource_group.test.location
   function_app_name             = "fpn-to-start-${random_pet.suffix.id}"
   scheduler_action              = "start"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = "true"
   custom_app_settings = {
     "test" = random_pet.suffix.id

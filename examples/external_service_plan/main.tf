@@ -21,7 +21,7 @@ module "external_service_plan" {
   location                      = azurerm_resource_group.this.location
   function_app_name             = "fpn-ext-${random_pet.suffix.id}"
   scheduler_action              = "start"
-  scheduler_ncrontab_expression = "0 7 * * *"
+  scheduler_ncrontab_expression = "0 0 7 * * 1-5"
   virtual_machine_schedule      = true
   existing_service_plan = {
     name                = azurerm_service_plan.external.name
