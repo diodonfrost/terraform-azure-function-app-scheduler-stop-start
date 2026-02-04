@@ -59,7 +59,7 @@ resource "azurerm_linux_virtual_machine" "to_stop" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   source_image_reference {
@@ -107,7 +107,7 @@ resource "azurerm_linux_virtual_machine" "do_not_stop" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   source_image_reference {
