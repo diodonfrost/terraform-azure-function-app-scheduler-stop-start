@@ -2,6 +2,9 @@
 
 Terraform module which creates app function scheduler for stop and start resources on Azure
 
+**Note:** To deploy multiple schedulers at once, you can use this wrapper module [function-app-multi-schedulers-stop-start
+](https://registry.terraform.io/modules/diodonfrost/function-app-multi-schedulers-stop-start/azure/latest) which simplifies the management of multiple schedules.
+
 ## Usage
 
 ```hcl
