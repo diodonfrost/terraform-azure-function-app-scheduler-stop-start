@@ -1,7 +1,7 @@
 """Virtual machine handler module."""
 
 import logging
-from typing import Callable, Tuple
+from typing import Callable, Iterator, Tuple
 
 from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
@@ -32,22 +32,29 @@ class VirtualMachineScheduler:
         parts = resource_id.split("/")
         return parts[4], parts[-1]
 
-    def _perform_action(
-        self, azure_tags: dict, action: str, operation: Callable
-    ) -> None:
-        """Execute an operation on virtual machines matching the tags.
+    def list_resources(self, azure_tags: dict) -> Iterator[str]:
+        """List virtual machines matching the given tags.
 
         :param dict azure_tags: Tags to filter resources by
-        :param str action: Action name for logging ("Start" or "Stop")
-        :param Callable operation: Function to call on each resource
+        :return: Iterator of resource IDs
         """
-        for vm_id in self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE):
-            try:
-                resource_group, vm_name = self._parse_resource_id(vm_id)
-                operation(resource_group_name=resource_group, vm_name=vm_name)
-                logging.info("%s virtual machine: %s", action, vm_id)
-            except AzureError as exc:
-                azure_exceptions("virtual_machine", vm_id, exc)
+        return self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE)
+
+    def _perform_action(
+        self, resource_id: str, action: str, operation: Callable
+    ) -> None:
+        """Execute an operation on a single virtual machine.
+
+        :param str resource_id: The Azure resource ID
+        :param str action: Action name for logging ("Start" or "Stop")
+        :param Callable operation: Function to call on the resource
+        """
+        try:
+            resource_group, vm_name = self._parse_resource_id(resource_id)
+            operation(resource_group_name=resource_group, vm_name=vm_name)
+            logging.info("%s virtual machine: %s", action, resource_id)
+        except AzureError as exc:
+            azure_exceptions("virtual_machine", resource_id, exc)
 
     def stop(self, azure_tags: dict) -> None:
         """Azure virtual machine stop function.
@@ -58,9 +65,12 @@ class VirtualMachineScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        self._perform_action(
-            azure_tags, "Stop", self.compute_client.virtual_machines.begin_deallocate
-        )
+        for resource_id in self.list_resources(azure_tags):
+            self._perform_action(
+                resource_id,
+                "Stop",
+                self.compute_client.virtual_machines.begin_deallocate,
+            )
 
     def start(self, azure_tags: dict) -> None:
         """Azure virtual machine start function.
@@ -71,6 +81,9 @@ class VirtualMachineScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        self._perform_action(
-            azure_tags, "Start", self.compute_client.virtual_machines.begin_start
-        )
+        for resource_id in self.list_resources(azure_tags):
+            self._perform_action(
+                resource_id,
+                "Start",
+                self.compute_client.virtual_machines.begin_start,
+            )

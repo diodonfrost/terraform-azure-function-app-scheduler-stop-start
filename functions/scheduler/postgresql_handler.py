@@ -1,7 +1,7 @@
 """postgresql handler module."""
 
 import logging
-from typing import Callable, Tuple
+from typing import Callable, Iterator, Tuple
 
 from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
@@ -32,22 +32,29 @@ class PostgresSqlScheduler:
         parts = resource_id.split("/")
         return parts[4], parts[-1]
 
-    def _perform_action(
-        self, azure_tags: dict, action: str, operation: Callable
-    ) -> None:
-        """Execute an operation on PostgreSQL servers matching the tags.
+    def list_resources(self, azure_tags: dict) -> Iterator[str]:
+        """List PostgreSQL servers matching the given tags.
 
         :param dict azure_tags: Tags to filter resources by
-        :param str action: Action name for logging ("Start" or "Stop")
-        :param Callable operation: Function to call on each resource
+        :return: Iterator of resource IDs
         """
-        for pg_id in self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE):
-            try:
-                resource_group, server_name = self._parse_resource_id(pg_id)
-                operation(resource_group_name=resource_group, server_name=server_name)
-                logging.info("%s postgresql: %s", action, pg_id)
-            except AzureError as exc:
-                azure_exceptions("postgresql", pg_id, exc)
+        return self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE)
+
+    def _perform_action(
+        self, resource_id: str, action: str, operation: Callable
+    ) -> None:
+        """Execute an operation on a single PostgreSQL server.
+
+        :param str resource_id: The Azure resource ID
+        :param str action: Action name for logging ("Start" or "Stop")
+        :param Callable operation: Function to call on the resource
+        """
+        try:
+            resource_group, server_name = self._parse_resource_id(resource_id)
+            operation(resource_group_name=resource_group, server_name=server_name)
+            logging.info("%s postgresql: %s", action, resource_id)
+        except AzureError as exc:
+            azure_exceptions("postgresql", resource_id, exc)
 
     def stop(self, azure_tags: dict) -> None:
         """Azure postgresql stop function.
@@ -58,9 +65,10 @@ class PostgresSqlScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        self._perform_action(
-            azure_tags, "Stop", self.postgres_client.servers.begin_stop
-        )
+        for resource_id in self.list_resources(azure_tags):
+            self._perform_action(
+                resource_id, "Stop", self.postgres_client.servers.begin_stop
+            )
 
     def start(self, azure_tags: dict) -> None:
         """Azure postgresql start function.
@@ -71,6 +79,7 @@ class PostgresSqlScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        self._perform_action(
-            azure_tags, "Start", self.postgres_client.servers.begin_start
-        )
+        for resource_id in self.list_resources(azure_tags):
+            self._perform_action(
+                resource_id, "Start", self.postgres_client.servers.begin_start
+            )

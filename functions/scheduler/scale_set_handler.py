@@ -1,7 +1,7 @@
 """Scale set handler module."""
 
 import logging
-from typing import Tuple
+from typing import Callable, Iterator, Tuple
 
 from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
@@ -32,6 +32,14 @@ class ScaleSetScheduler:
         parts = resource_id.split("/")
         return parts[4], parts[-1]
 
+    def list_resources(self, azure_tags: dict) -> Iterator[str]:
+        """List scale sets matching the given tags.
+
+        :param dict azure_tags: Tags to filter resources by
+        :return: Iterator of resource IDs
+        """
+        return self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE)
+
     def _set_orchestration_state(
         self, resource_group: str, scale_set_name: str, mode: str
     ) -> None:
@@ -56,6 +64,32 @@ class ScaleSetScheduler:
             else:
                 logging.error("An error occurred: %s", exc)
 
+    def _perform_action(
+        self, resource_id: str, action: str, operation: Callable
+    ) -> None:
+        """Execute an operation on a single scale set.
+
+        :param str resource_id: The Azure resource ID
+        :param str action: Action name for logging ("Start" or "Stop")
+        :param Callable operation: Function to call on the resource
+        """
+        resource_group, scale_set_name = self._parse_resource_id(resource_id)
+
+        orchestration_mode = "Suspending" if action == "Stop" else "Resume"
+        self._set_orchestration_state(
+            resource_group, scale_set_name, orchestration_mode
+        )
+
+        try:
+            operation(
+                resource_group_name=resource_group,
+                vm_scale_set_name=scale_set_name,
+                vm_instance_i_ds=None,
+            )
+            logging.info("%s scale set: %s", action, resource_id)
+        except AzureError as exc:
+            azure_exceptions("scale_set", resource_id, exc)
+
     def stop(self, azure_tags: dict) -> None:
         """Azure scale set stop function.
 
@@ -65,24 +99,12 @@ class ScaleSetScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        for scale_set_id in self.tag_filter.get_resources(
-            azure_tags, self.RESOURCE_TYPE
-        ):
-            resource_group, scale_set_name = self._parse_resource_id(scale_set_id)
-
-            # Set orchestration state to suspending
-            self._set_orchestration_state(resource_group, scale_set_name, "Suspending")
-
-            # Deallocate the scale set
-            try:
-                self.compute_client.virtual_machine_scale_sets.begin_deallocate(
-                    resource_group_name=resource_group,
-                    vm_scale_set_name=scale_set_name,
-                    vm_instance_i_ds=None,
-                )
-                logging.info("Stop scale set: %s", scale_set_id)
-            except AzureError as exc:
-                azure_exceptions("scale_set", scale_set_id, exc)
+        for scale_set_id in self.list_resources(azure_tags):
+            self._perform_action(
+                scale_set_id,
+                "Stop",
+                self.compute_client.virtual_machine_scale_sets.begin_deallocate,
+            )
 
     def start(self, azure_tags: dict) -> None:
         """Azure scale set start function.
@@ -93,21 +115,9 @@ class ScaleSetScheduler:
             The key of the tag that you want to filter by.
             For example: {"key": "value"}
         """
-        for scale_set_id in self.tag_filter.get_resources(
-            azure_tags, self.RESOURCE_TYPE
-        ):
-            resource_group, scale_set_name = self._parse_resource_id(scale_set_id)
-
-            # Set orchestration state to resume
-            self._set_orchestration_state(resource_group, scale_set_name, "Resume")
-
-            # Start the scale set
-            try:
-                self.compute_client.virtual_machine_scale_sets.begin_start(
-                    resource_group_name=resource_group,
-                    vm_scale_set_name=scale_set_name,
-                    vm_instance_i_ds=None,
-                )
-                logging.info("Start scale set: %s", scale_set_id)
-            except AzureError as exc:
-                azure_exceptions("scale_set", scale_set_id, exc)
+        for scale_set_id in self.list_resources(azure_tags):
+            self._perform_action(
+                scale_set_id,
+                "Start",
+                self.compute_client.virtual_machine_scale_sets.begin_start,
+            )
