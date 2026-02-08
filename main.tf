@@ -70,6 +70,7 @@ resource "azurerm_linux_function_app" "this" {
     AKS_SCHEDULE                   = tostring(var.aks_schedule)
     CONTAINER_GROUP_SCHEDULE       = tostring(var.container_group_schedule)
     SCHEDULER_EXCLUDED_DATES       = jsonencode(var.scheduler_excluded_dates)
+    DRY_RUN                        = tostring(var.dry_run)
   }, var.custom_app_settings)
 
   identity {

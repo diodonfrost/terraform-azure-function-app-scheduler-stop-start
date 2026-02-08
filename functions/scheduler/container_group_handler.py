@@ -7,6 +7,7 @@ from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.containerinstance import ContainerInstanceManagementClient
 
+from .decorators import skip_on_dry_run
 from .exceptions import azure_exceptions
 from .filter_resources_by_tags import FilterByTags
 
@@ -40,6 +41,7 @@ class ContainerGroupScheduler:
         """
         return self.tag_filter.get_resources(azure_tags, self.RESOURCE_TYPE)
 
+    @skip_on_dry_run
     def _perform_action(
         self, resource_id: str, action: str, operation: Callable
     ) -> None:

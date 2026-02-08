@@ -54,9 +54,9 @@ module "start_virtual_machines" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.3.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.7.1 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.59.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.8.1 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -92,6 +92,7 @@ No modules.
 | <a name="input_create_role_assignment"></a> [create\_role\_assignment](#input\_create\_role\_assignment) | Whether to create the custom role definition and role assignment. Set to false if you manage permissions externally. | `bool` | `true` | no |
 | <a name="input_custom_app_settings"></a> [custom\_app\_settings](#input\_custom\_app\_settings) | Additional app settings/environment variables to be added to the function app | `map(string)` | `{}` | no |
 | <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | Diagnostic settings for the function app | <pre>object({<br/>    name                           = string<br/>    storage_account_id             = optional(string, null)<br/>    log_analytics_id               = optional(string, null)<br/>    log_analytics_destination_type = optional(string, null)<br/>    eventhub_name                  = optional(string, null)<br/>    eventhub_authorization_rule_id = optional(string, null)<br/>    log_categories                 = optional(list(string), ["FunctionAppLogs"])<br/>    enable_metrics                 = optional(bool, false)<br/>  })</pre> | `null` | no |
+| <a name="input_dry_run"></a> [dry\_run](#input\_dry\_run) | Enable dry-run mode. When true, the scheduler will only log the resources it would stop/start without performing any action. | `bool` | `false` | no |
 | <a name="input_existing_service_plan"></a> [existing\_service\_plan](#input\_existing\_service\_plan) | Configuration for using an existing external service plan instead of creating a new one. | <pre>object({<br/>    name                = string<br/>    resource_group_name = string<br/>  })</pre> | `null` | no |
 | <a name="input_existing_storage_account"></a> [existing\_storage\_account](#input\_existing\_storage\_account) | Configuration for using an existing external storage account instead of creating a new one. | <pre>object({<br/>    name                = string<br/>    resource_group_name = string<br/>  })</pre> | `null` | no |
 | <a name="input_function_app_name"></a> [function\_app\_name](#input\_function\_app\_name) | The name of the Azure Function App | `string` | n/a | yes |

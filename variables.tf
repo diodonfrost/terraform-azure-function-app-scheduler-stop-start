@@ -145,6 +145,12 @@ variable "container_group_schedule" {
   default     = false
 }
 
+variable "dry_run" {
+  description = "Enable dry-run mode. When true, the scheduler will only log the resources it would stop/start without performing any action."
+  type        = bool
+  default     = false
+}
+
 variable "custom_app_settings" {
   description = "Additional app settings/environment variables to be added to the function app"
   type        = map(string)

@@ -7,6 +7,7 @@ from azure.core.exceptions import AzureError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 
+from .decorators import skip_on_dry_run
 from .exceptions import azure_exceptions
 from .filter_resources_by_tags import FilterByTags
 
@@ -64,6 +65,7 @@ class ScaleSetScheduler:
             else:
                 logging.error("An error occurred: %s", exc)
 
+    @skip_on_dry_run
     def _perform_action(
         self, resource_id: str, action: str, operation: Callable
     ) -> None:
