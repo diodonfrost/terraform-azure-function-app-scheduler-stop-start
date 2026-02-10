@@ -9,9 +9,9 @@ def azure_exceptions(resource_name: str, resource_id: str, exception) -> None:
     Log scale set exceptions on the specific Azure resources.
 
     :param str resource_name:
-        Aws resource name
+        Azure resource name
     :param str resource_id:
-        Aws resource id
+        Azure resource id
     :param str exception:
         Human readable string describing the exception
     """
