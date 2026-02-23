@@ -29,6 +29,14 @@ resource "azurerm_role_definition" "this" {
       "Microsoft.ContainerInstance/containerGroups/read",
       "Microsoft.ContainerInstance/containerGroups/start/action",
       "Microsoft.ContainerInstance/containerGroups/stop/action",
+      "Microsoft.Insights/*/read",
+      "Microsoft.Insights/*/write",
+      "Microsoft.Insights/*/action",
+      "Microsoft.OperationalInsights/*/read",
+      "Microsoft.OperationalInsights/*/write",
+      "Microsoft.OperationalInsights/*/action",
+      "Microsoft.AlertsManagement/alerts/*/read",
+      "Microsoft.AlertsManagement/alerts/*/action"
     ]
     not_actions = []
   }

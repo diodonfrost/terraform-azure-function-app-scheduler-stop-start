@@ -145,6 +145,12 @@ variable "container_group_schedule" {
   default     = false
 }
 
+variable "alert_rule_schedule" {
+  description = "Enable Azure Alert Rule scheduler (metric alerts, scheduled query rules, activity log alerts)."
+  type        = bool
+  default     = false
+}
+
 variable "dry_run" {
   description = "Enable dry-run mode. When true, the scheduler will only log the resources it would stop/start without performing any action."
   type        = bool

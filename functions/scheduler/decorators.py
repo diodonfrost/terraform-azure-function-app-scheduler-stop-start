@@ -17,10 +17,10 @@ def skip_on_dry_run(func):
     """
 
     @functools.wraps(func)
-    def wrapper(self, resource_id, action, operation):
+    def wrapper(self, resource_id, action, *args, **kwargs):
         if os.environ.get("DRY_RUN", "false").lower() == "true":
             logging.info("[DRY-RUN] Would %s: %s", action, resource_id)
             return
-        return func(self, resource_id, action, operation)
+        return func(self, resource_id, action, *args, **kwargs)
 
     return wrapper

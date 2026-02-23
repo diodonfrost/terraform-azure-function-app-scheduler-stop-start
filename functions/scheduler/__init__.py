@@ -6,6 +6,7 @@ import os
 import azure.functions as func
 
 from .aks_handler import AksScheduler
+from .alert_rule_handler import AlertRuleScheduler
 from .container_group_handler import ContainerGroupScheduler
 from .mysql_handler import MySqlScheduler
 from .postgresql_handler import PostgresSqlScheduler
@@ -36,6 +37,7 @@ def main(scheduler: func.TimerRequest) -> None:
         MySqlScheduler: os.environ["MYSQL_SCHEDULE"],
         AksScheduler: os.environ["AKS_SCHEDULE"],
         ContainerGroupScheduler: os.environ["CONTAINER_GROUP_SCHEDULE"],
+        AlertRuleScheduler: os.environ["ALERT_RULE_SCHEDULE"],
     }
 
     for subscription_id in subscription_ids:
