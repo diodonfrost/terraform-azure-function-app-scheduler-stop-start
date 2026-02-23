@@ -87,6 +87,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_schedule"></a> [aks\_schedule](#input\_aks\_schedule) | Enable Azure AKS scheduler. | `bool` | `false` | no |
+| <a name="input_alert_rule_schedule"></a> [alert\_rule\_schedule](#input\_alert\_rule\_schedule) | Enable Azure Alert Rule scheduler (metric alerts, scheduled query rules, activity log alerts). | `bool` | `false` | no |
 | <a name="input_application_insights"></a> [application\_insights](#input\_application\_insights) | Configuration for using an existing external Application Insights. | <pre>object({<br/>    connection_string   = string<br/>    instrumentation_key = string<br/>  })</pre> | `null` | no |
 | <a name="input_container_group_schedule"></a> [container\_group\_schedule](#input\_container\_group\_schedule) | Enable Azure Container group scheduler. | `bool` | `false` | no |
 | <a name="input_create_role_assignment"></a> [create\_role\_assignment](#input\_create\_role\_assignment) | Whether to create the custom role definition and role assignment. Set to false if you manage permissions externally. | `bool` | `true` | no |
